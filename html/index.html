@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html ng-app="eCommerce">
+
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/index.css">
+</head>
+
+<body>
+
+<nav ng-controller="navigation">
+<ul>
+    <li ng-repeat="navigation in navigations">
+        <a href="{{ navigation.link }}">{{ navigation.name}}</a>
+    </li>
+</ul>
+
+</nav>
+
+<div>
+    <ng-view></ng-view>
+</div>
+
+</body>
+<script src="../scripts/app.js"></script>
+<script src="../scripts/controllers/controllers.js"></script>
+<script src="../scripts/services/services.js"></script>
+</html>

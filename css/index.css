@@ -1,0 +1,19 @@
+nav {
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: inline-flex;
+    margin: 20px;
+}
+
+nav ul li {
+    margin: 20px;
+
+}
+
+nav ul li button {
+    padding: 20px 30px;
+}
+
