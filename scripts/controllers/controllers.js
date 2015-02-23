@@ -8,6 +8,16 @@ app.controller('navigation',function($scope, navigationService) {
     }
 });
 
+app.controller('info', function ($scope, infoContentService) {
+    $scope.infoTexts = [];
+    init();
+
+    function init() {
+        $scope.infoTexts = infoContentService.getInfoText();
+    }
+});
+
+
 app.controller('newUser', function ($scope) {
     init();
 

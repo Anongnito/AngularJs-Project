@@ -4,8 +4,8 @@ var app = angular.module('eCommerce',['ngRoute']);
 app.config(function ($routeProvider) {
     $routeProvider
         .when('/', {
-            controller:'newUser',
-            templateUrl: 'newUser.html'
+            controller:'info',
+            templateUrl: 'info.html'
         })
         .when('/newUser',{
             controller: 'newUser',

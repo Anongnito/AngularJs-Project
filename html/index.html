@@ -15,13 +15,13 @@
 <nav ng-controller="navigation">
 <ul>
     <li ng-repeat="navigation in navigations">
-        <a href="{{ navigation.link }}">{{ navigation.name}}</a>
+        <a href="{{ navigation.link }}"><h1>{{ navigation.name}}</h1></a>
     </li>
 </ul>
 
 </nav>
 
-<div>
+<div class="outerContent">
     <ng-view></ng-view>
 </div>
 
