@@ -18,21 +18,29 @@ app.controller('info', function ($scope, infoContentService) {
 });
 
 
-app.controller('newUser', function ($scope) {
+app.controller('newUser', function ($scope, newUserImageContentService) {
+    $scope.imageContent = [];
     init();
 
     function init() {
-
+        $scope.imageContent = newUserImageContentService.getImageContent();
     }
 });
 
-app.controller('existingUser', function ($scope) {
+app.controller('returningUser', function ($scope, returningUserImageContentService, newUserImageContentService) {
+    $scope.imageContent = [];
     init();
 
     function init() {
-
+        //document.cookie="returningVisitor=returning visitor; path=/";
+        if( document.cookie.indexOf('returning visitor') > 0) {
+            $scope.imageContent = returningUserImageContentService.getImageContent();
+        }else {
+            $scope.imageContent = newUserImageContentService.getImageContent();
+        }
     }
 });
+
 
 app.controller('cmsUser', function ($scope) {
     init();
