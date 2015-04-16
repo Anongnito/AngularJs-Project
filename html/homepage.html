@@ -1,0 +1,20 @@
+<html>
+<section id="homePage">
+    <div id="firstSection">
+        <h1>THE CHEAPEST AND BEST QUALITY VINTAGE CLOTHES YOU CAN FIND</h1>
+        <h4>and possibly the ugliest</h4>
+    </div>
+    <hr>
+    <div id="secondSection" ng-controller="homeInfoText">
+        <ul>
+            <li ng-repeat="homeInfoText in infoTexts">
+                <h1>{{homeInfoText.title}}</h1>
+                <img src="{{homeInfoText.image}}">
+                <p>{{homeInfoText.paragraph}}</p>
+            </li>
+        </ul>
+    </div>
+    <div id="thirdSection">
+        <chart1 id="chart" chart-data="chart1Data"></chart1>
+    </div>
+</section>

@@ -1,4 +1,4 @@
-app.controller('navigation',function($scope, navigationService) {
+app.controller('navigation', function($scope, navigationService) {
     $scope.navigations = [];
 
     init();
@@ -8,41 +8,19 @@ app.controller('navigation',function($scope, navigationService) {
     }
 });
 
-app.controller('info', function ($scope, infoContentService) {
+app.controller('homeInfoText', function($scope, homePageInfo) {
+    $scope.chart1Data = [];
     $scope.infoTexts = [];
     init();
 
     function init() {
-        $scope.infoTexts = infoContentService.getInfoText();
+        $scope.chart1Data = homePageInfo.getChart1Data();
+        $scope.infoTexts = homePageInfo.getInfoText();
+
     }
 });
 
-
-app.controller('newUser', function ($scope, newUserImageContentService) {
-    $scope.imageContent = [];
-    init();
-
-    function init() {
-        $scope.imageContent = newUserImageContentService.getImageContent();
-    }
-});
-
-app.controller('returningUser', function ($scope, returningUserImageContentService, newUserImageContentService) {
-    $scope.imageContent = [];
-    init();
-
-    function init() {
-        //document.cookie="returningVisitor=returning visitor; path=/";
-        if( document.cookie.indexOf('returning visitor') > 0) {
-            $scope.imageContent = returningUserImageContentService.getImageContent();
-        }else {
-            $scope.imageContent = newUserImageContentService.getImageContent();
-        }
-    }
-});
-
-
-app.controller('cmsUser', function ($scope) {
+app.controller('about', function() {
     init();
 
     function init() {
@@ -50,7 +28,23 @@ app.controller('cmsUser', function ($scope) {
     }
 });
 
-app.controller('adminUser', function ($scope) {
+app.controller('contact', function() {
+    init();
+
+    function init() {
+
+    }
+});
+
+app.controller('products', function() {
+    init();
+
+    function init() {
+
+    }
+});
+
+app.controller('d3', function($scope) {
     init();
 
     function init() {
