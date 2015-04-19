@@ -10,11 +10,19 @@
             <li ng-repeat="homeInfoText in infoTexts">
                 <h1>{{homeInfoText.title}}</h1>
                 <img src="{{homeInfoText.image}}">
+
                 <p>{{homeInfoText.paragraph}}</p>
             </li>
         </ul>
     </div>
+    <hr>
     <div id="thirdSection">
-        <chart1 id="chart" chart-data="chart1Data"></chart1>
+        <h1>Here is Proof that our store is the best</h1>
+        <h4>With deceitful data</h4>
+
+        <div id="charts">
+            <bar-chart id="barChart" class="chart" chart-data="chart1Data"></bar-chart>
+            <pie-chart id="pieChart" class="chart" chart-data="chart2Data"></pie-chart>
+        </div>
     </div>
 </section>

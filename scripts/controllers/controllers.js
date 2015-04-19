@@ -10,13 +10,14 @@ app.controller('navigation', function($scope, navigationService) {
 
 app.controller('homeInfoText', function($scope, homePageInfo) {
     $scope.chart1Data = [];
+    $scope.chart2Data = [];
     $scope.infoTexts = [];
     init();
 
     function init() {
-        $scope.chart1Data = homePageInfo.getChart1Data();
         $scope.infoTexts = homePageInfo.getInfoText();
-
+        $scope.chart1Data = homePageInfo.getChart1Data();
+        $scope.chart2Data = homePageInfo.getChart2Data();
     }
 });
 

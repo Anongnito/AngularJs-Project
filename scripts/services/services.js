@@ -35,6 +35,9 @@ app.service('homePageInfo', function() {
     this.getChart1Data = function() {
         return chart1Data
     };
+    this.getChart2Data = function() {
+        return chart2Data
+    };
     var infoTexts = [
         {
             id: 'allYourMoney',
@@ -56,6 +59,11 @@ app.service('homePageInfo', function() {
         }
     ];
 
-    var chart1Data = [10, 20, 30, 40, 60, 80, 20, 50]
+    var chart1Data = [10, 20, 30, 40, 60, 80, 60, 90];
+    var chart2Data = [
+        {title: 'Happy Customers', value: 50},
+        {title: 'Unhappy Customers', value: 10},
+        {title: 'Neutral Customers', value: 20}
+    ];
 
 });
