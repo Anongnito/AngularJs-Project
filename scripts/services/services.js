@@ -1,72 +1,73 @@
-app.service('navigationService', function() {
-    this.getNavigation = function() {
-        return navigations;
-    };
+(function() {
+    "use strict";
 
-    var navigations = [
-        {
-            id: 0,
-            name: 'Home',
-            link: '#/'
-        },
-        {
-            id: 1,
-            name: 'Products',
-            link: '#/products'
-        },
-        {
-            id: 2,
-            name: 'About Us',
-            link: '#/about'
-        },
-        {
-            id: 3,
-            name: 'Contact',
-            link: '#/contact'
-        }
-    ]
-});
+    app.service('navigationService', function() {
+        this.getNavigation = function() {
+            return navigations;
+        };
 
-app.service('homePageInfo', function() {
-    this.getInfoText = function() {
-        return infoTexts;
-    };
+        var navigations = [
+            {
+                id: 0,
+                name: 'Home',
+                link: '#/'
+            },
+            {
+                id: 1,
+                name: 'Products',
+                link: '#/products'
+            },
+            {
+                id: 2,
+                name: 'About Us',
+                link: '#/about'
+            },
+            {
+                id: 3,
+                name: 'Contact',
+                link: '#/contact'
+            }
+        ]
+    });
 
-    this.getChart1Data = function() {
-        return chart1Data;
-    };
-    this.getChart2Data = function() {
-        return chart2Data;
-    };
-    this.getGitHubData = function() {
-        return gitHubData;
-    };
-    var infoTexts = [
-        {
-            id: 'allYourMoney',
-            title: 'We will take all your money!',
-            image: '../img/money-bag-5-128x128.png',
-            paragraph: 'Does not matter if you pay 1£ or 1000£, we will take it all. Make sure you are 100% sure you want to buy our products.'
-        },
-        {
-            id: 'noItems',
-            title: 'You will not receive your items!',
-            image: '../img/bag-8-128x128.png',
-            paragraph: 'We apologize, but we are too lazy to post your items. Actually, we do not even have any products - images on the site are fake!'
-        },
-        {
-            id: 'noShop',
-            title: 'No shop where you can complain!',
-            image: '../img/shop-5-128x128.png',
-            paragraph: 'We will not post our number, email and we have no office or shop where you can complain and/or scream at us. It is your fault.'
-        }
-    ];
+    app.service('homePageInfo', function() {
+        this.getInfoText = function() {
+            return infoTexts;
+        };
 
-    var chart1Data = [10, 20, 30, 40, 60, 80, 60, 90];
-    var chart2Data = [
-        {title: 'Happy Customers', value: 50},
-        {title: 'Unhappy Customers', value: 10},
-        {title: 'Neutral Customers', value: 20}
-    ];
-    var gitHubData = [];
-});
+        this.getChart1Data = function() {
+            return chart1Data;
+        };
+        this.getChart2Data = function() {
+            return chart2Data;
+        };
+        var infoTexts = [
+            {
+                id: 'allYourMoney',
+                title: 'We will take all your money!',
+                image: '../img/money-bag-5-128x128.png',
+                paragraph: 'Does not matter if you pay 1£ or 1000£, we will take it all. Make sure you are 100% sure you want to buy our products.'
+            },
+            {
+                id: 'noItems',
+                title: 'You will not receive your items!',
+                image: '../img/bag-8-128x128.png',
+                paragraph: 'We apologize, but we are too lazy to post your items. Actually, we do not even have any products - images on the site are fake!'
+            },
+            {
+                id: 'noShop',
+                title: 'No shop where you can complain!',
+                image: '../img/shop-5-128x128.png',
+                paragraph: 'We will not post our number, email and we have no office or shop where you can complain and/or scream at us. It is your fault.'
+            }
+        ];
+
+        var chart1Data = [10, 20, 30, 40, 60, 80, 60, 90];
+        var chart2Data = [
+            {title: 'Happy Customers', value: 50},
+            {title: 'Unhappy Customers', value: 10},
+            {title: 'Neutral Customers', value: 20}
+        ];
+        var gitHubData = [];
+    });
+})();
