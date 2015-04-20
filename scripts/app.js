@@ -40,8 +40,8 @@ app.directive('barChart', function() {
             });
 
             function doBarChart() {
-                var width = 300;
-                var height = 300;
+                var width = 350;
+                var height = 350;
                 var barWidth = width / scope.data.length;
 
                 var y = d3.scale.linear()

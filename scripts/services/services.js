@@ -33,10 +33,13 @@ app.service('homePageInfo', function() {
     };
 
     this.getChart1Data = function() {
-        return chart1Data
+        return chart1Data;
     };
     this.getChart2Data = function() {
-        return chart2Data
+        return chart2Data;
+    };
+    this.getGitHubData = function() {
+        return gitHubData;
     };
     var infoTexts = [
         {
@@ -65,5 +68,5 @@ app.service('homePageInfo', function() {
         {title: 'Unhappy Customers', value: 10},
         {title: 'Neutral Customers', value: 20}
     ];
-
+    var gitHubData = [];
 });
