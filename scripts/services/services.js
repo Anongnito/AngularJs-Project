@@ -34,12 +34,17 @@
         this.getInfoText = function() {
             return infoTexts;
         };
-
         this.getChart1Data = function() {
             return chart1Data;
         };
         this.getChart2Data = function() {
             return chart2Data;
+        };
+        this.getGitHubData = function() {
+            return gitHubData;
+        };
+        this.setGitHubData = function(data) {
+          gitHubData.push(data);
         };
         var infoTexts = [
             {

@@ -23,11 +23,7 @@
         <div id="charts">
             <bar-chart id="barChart" class="chart" chart-data="chart1Data"></bar-chart>
             <pie-chart id="pieChart" class="chart" chart-data="chart2Data"></pie-chart>
-            <ul style="position: absolute;top:0">
-                <li ng-repeat="homeInfoText in gitHubData track by $index">
-                    <h1>{{ homeInfoText}}</h1>
-                </li>
-            </ul>
+            <line-chart id="lineChart" class="chart" chart-data="gitHubData"></line-chart>
         </div>
     </div>
 </section>

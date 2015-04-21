@@ -22,11 +22,9 @@
         init();
 
         function init() {
-
             $scope.infoTexts = homePageInfo.getInfoText();
             $scope.chart1Data = homePageInfo.getChart1Data();
             $scope.chart2Data = homePageInfo.getChart2Data();
-            getCommitData();
         }
 
 
@@ -35,22 +33,16 @@
 
                 var fullDate = new Date(data[i].commit.author.date);
                 var dayOfMonth = fullDate.getDate();
-                var day = fullDate.getDay();
+                var year = fullDate.getFullYear();
                 var month = fullDate.getMonth();
-                var monthNames = ["January", "February", "March", "April", "May", "June",
-                    "July", "August", "September", "October", "November", "December"
-                ];
-                var dayNames = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday",
-                    "Sunday"
-                ];
 
-                $scope.gitHubData.push(dayOfMonth + " " + monthNames[month] + " " + dayNames[day])
+                homePageInfo.setGitHubData({date: year + "-" +month + "-" +dayOfMonth, amount: 1});
 
             }
-            return $scope.gitHubData;
+            $scope.gitHubData = homePageInfo.getGitHubData();
         };
 
-        function getCommitData() {
+        $scope.getCommitData = function() {
 
             $http({
                 method: 'GET',
@@ -72,7 +64,8 @@
                         $scope.error = 'Error: ' + status;
                     }
                 });
-        }
+        };
+        $scope.getCommitData();
     });
 
     app.controller('about', function() {
