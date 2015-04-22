@@ -15,7 +15,6 @@
         $scope.chart1Data = [];
         $scope.chart2Data = [];
         $scope.infoTexts = [];
-        $scope.gitHubData = [];
 
         $scope.user = 'anongnito';
         $scope.repo = 'angularjs-project';
@@ -26,7 +25,6 @@
             $scope.chart1Data = homePageInfo.getChart1Data();
             $scope.chart2Data = homePageInfo.getChart2Data();
         }
-
 
         var formatDates = function(data) {
             for(var i = 0; i < data.length - 1; i++) {

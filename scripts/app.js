@@ -190,8 +190,12 @@ app.directive('lineChart', function() {
         replace: false,
         scope: {data: '=chartData'},
         link: function(scope, element) {
-
+            scope.$watch('data', function(value){
+                if(value){
+                    console.log(value);
+                }
+            });
         }
-
     };
+
 });
