@@ -27,15 +27,29 @@
         }
 
         var formatDates = function(data) {
-            for(var i = 0; i < data.length - 1; i++) {
+            var isDuplicatedDate = "";
+            var amount = 1;
+            for(var i = 0; i < data.length; i++) {
 
                 var fullDate = new Date(data[i].commit.author.date);
                 var dayOfMonth = fullDate.getDate();
                 var year = fullDate.getFullYear();
-                var month = fullDate.getMonth();
+                var month = fullDate.getMonth() + 1;
+                var initialDate = year + "-" + month + "-" + dayOfMonth;
 
-                homePageInfo.setGitHubData({date: year + "-" +month + "-" +dayOfMonth, amount: 1});
+                if(isDuplicatedDate == initialDate) {
+                    amount += 1;
+                    isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
+                    if(data.length - 2 == i) {
+                        homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
+                        amount = 1;
+                    }
 
+                } else {
+                    homePageInfo.setGitHubData({date: initialDate, amount: amount});
+                    amount = 1;
+                    isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
+                }
             }
             $scope.gitHubData = homePageInfo.getGitHubData();
         };

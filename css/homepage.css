@@ -86,3 +86,17 @@
     margin-top: 50px;
     position: relative;
 }
+
+#lineChart path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+#lineChart .axis path,
+#lineChart .axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}

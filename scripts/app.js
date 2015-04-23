@@ -113,6 +113,7 @@ app.directive('pieChart', function() {
             });
 
             function doPieChart() {
+
                 var width = 350;
                 var height = 350;
                 var radius = Math.min(width, height) / 2;
@@ -190,9 +191,66 @@ app.directive('lineChart', function() {
         replace: false,
         scope: {data: '=chartData'},
         link: function(scope, element) {
-            scope.$watch('data', function(value){
-                if(value){
-                    console.log(value);
+            scope.$watch('data', function(data){
+                if(data){
+                    var margin = {top: 30, right: 20, bottom: 30, left: 50},
+                        width = 600 - margin.left - margin.right,
+                        height = 270 - margin.top - margin.bottom;
+
+
+                    var parseDate = d3.time.format("%Y-%m-%d").parse;
+
+                    var x = d3.time.scale().range([0, width]);
+                    var y = d3.scale.linear().range([height, 0]);
+
+                    var xAxis = d3.svg.axis().scale(x)
+                        .orient("bottom").ticks(10);
+
+                    var yAxis = d3.svg.axis().scale(y)
+                        .orient("left").ticks(1);
+
+                    var valueline = d3.svg.line()
+                        .x(function(d) {
+                            return x(d.date);
+                        })
+                        .y(function(d) {
+                            return y(d.amount);
+                        });
+
+                    var svg = d3.select(element[0])
+                        .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .append("g")
+                        .attr("transform",
+                        "translate(" + margin.left + "," + margin.top + ")");
+
+                    scope.data.forEach(function(d) {
+                        d.date = parseDate(d.date);
+                        d.amount = +d.amount;
+
+                    });
+
+                    x.domain(d3.extent(scope.data, function(d) {
+                        return d.date;
+                    }));
+                    y.domain([0, d3.max(scope.data, function(d) {
+                        return d.amount;
+                    })]);
+
+                    svg.append("path")
+                        .attr("class", "line")
+                        .attr("d", valueline(scope.data));
+
+                    svg.append("g")
+                        .attr("class", "x axis")
+                        .attr("transform", "translate(0," + height + ")")
+                        .call(xAxis);
+
+
+                    svg.append("g")
+                        .attr("class", "y axis")
+                        .call(yAxis);
                 }
             });
         }
