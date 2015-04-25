@@ -193,21 +193,23 @@ app.directive('lineChart', function() {
         link: function(scope, element) {
             scope.$watch('data', function(data){
                 if(data){
+                    console.log(scope.data)
                     var margin = {top: 30, right: 20, bottom: 30, left: 50},
                         width = 600 - margin.left - margin.right,
                         height = 270 - margin.top - margin.bottom;
 
 
+
                     var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-                    var x = d3.time.scale().range([0, width]);
+                    var x = d3.time.scale().range([0, 2000]);
                     var y = d3.scale.linear().range([height, 0]);
 
                     var xAxis = d3.svg.axis().scale(x)
                         .orient("bottom").ticks(10);
 
                     var yAxis = d3.svg.axis().scale(y)
-                        .orient("left").ticks(1);
+                        .orient("left").ticks(5);
 
                     var valueline = d3.svg.line()
                         .x(function(d) {
@@ -217,13 +219,23 @@ app.directive('lineChart', function() {
                             return y(d.amount);
                         });
 
+                    var zoom = d3.behavior.zoom()
+                        .x(x)
+                        .y(y)
+                        .scaleExtent([1, 30])
+                        .on("zoom", zoomed);
+
                     var svg = d3.select(element[0])
-                        .append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                        .append("g")
-                        .attr("transform",
-                        "translate(" + margin.left + "," + margin.top + ")");
+                            .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                            .call(zoom)
+                            .append("g")
+                            .attr("transform",
+                            "translate(" + margin.left + "," + margin.top + ")")
+                        ;
+
+                        x.domain([new Date(2015, 0, 1), new Date(2015, 11,30)]);
 
                     scope.data.forEach(function(d) {
                         d.date = parseDate(d.date);
@@ -231,9 +243,6 @@ app.directive('lineChart', function() {
 
                     });
 
-                    x.domain(d3.extent(scope.data, function(d) {
-                        return d.date;
-                    }));
                     y.domain([0, d3.max(scope.data, function(d) {
                         return d.amount;
                     })]);
@@ -251,7 +260,17 @@ app.directive('lineChart', function() {
                     svg.append("g")
                         .attr("class", "y axis")
                         .call(yAxis);
+
+
+                    function zoomed() {
+                        svg.select("xAxis")
+                            .call(xAxis);
+
+                        svg.attr('transform', 'translate(' + d3.event.translate[0] + ')scale(' + d3.event.scale + ',1)');
+                    }
+
                 }
+
             });
         }
     };
