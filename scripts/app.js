@@ -23,7 +23,6 @@ app.config(function($routeProvider) {
 });
 
 app.directive('barChart', function() {
-
     return {
         restrict: 'E',
         replace: false,
@@ -90,7 +89,6 @@ app.directive('barChart', function() {
                     .text(function(d) {
                         return d;
                     });
-
             }
         }
     };
@@ -113,7 +111,6 @@ app.directive('pieChart', function() {
             });
 
             function doPieChart() {
-
                 var width = 350;
                 var height = 350;
                 var radius = Math.min(width, height) / 2;
@@ -182,7 +179,6 @@ app.directive('pieChart', function() {
             }
         }
     };
-
 });
 
 app.directive('lineChart', function() {
@@ -191,27 +187,24 @@ app.directive('lineChart', function() {
         replace: false,
         scope: {data: '=chartData'},
         link: function(scope, element) {
-            scope.$watch('data', function(data){
-                if(data){
-                    console.log(scope.data)
+            scope.$watch('data', function(data) {
+                if(data) {
                     var margin = {top: 30, right: 20, bottom: 30, left: 50},
-                        width = 600 - margin.left - margin.right,
-                        height = 270 - margin.top - margin.bottom;
-
-
+                        width = 600,
+                        height = 270;
 
                     var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-                    var x = d3.time.scale().range([0, 2000]);
+                    var x = d3.time.scale().range([0, 1500]);
                     var y = d3.scale.linear().range([height, 0]);
 
                     var xAxis = d3.svg.axis().scale(x)
-                        .orient("bottom").ticks(10);
+                        .orient("bottom").ticks(12);
 
                     var yAxis = d3.svg.axis().scale(y)
                         .orient("left").ticks(5);
 
-                    var valueline = d3.svg.line()
+                    var lineValue = d3.svg.line()
                         .x(function(d) {
                             return x(d.date);
                         })
@@ -219,23 +212,21 @@ app.directive('lineChart', function() {
                             return y(d.amount);
                         });
 
-                    var zoom = d3.behavior.zoom()
-                        .x(x)
-                        .y(y)
-                        .scaleExtent([1, 30])
-                        .on("zoom", zoomed);
-
                     var svg = d3.select(element[0])
-                            .append("svg")
-                            .attr("width", width + margin.left + margin.right)
-                            .attr("height", height + margin.top + margin.bottom)
-                            .call(zoom)
-                            .append("g")
-                            .attr("transform",
-                            "translate(" + margin.left + "," + margin.top + ")")
-                        ;
+                        .append("svg")
+                        .attr("width", width + margin.left + margin.right)
+                        .attr("height", height + margin.top + margin.bottom)
+                        .call(d3.behavior.zoom()
+                        .translate([0, 0])
+                        .scale(1.0)
+                        .scaleExtent([0.5, 2.0])
+                        .on("zoom", function() {
+                            svg.attr("transform", "translate(" + (d3.event.translate[0] + margin.left ) + "," + margin.top + ") scale(" + d3.event.scale + ")");
+                        }))
+                        .append("g")
+                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-                        x.domain([new Date(2015, 0, 1), new Date(2015, 11,30)]);
+                    x.domain([new Date(2015, 0, 1), new Date(2015, 11, 30)]);
 
                     scope.data.forEach(function(d) {
                         d.date = parseDate(d.date);
@@ -249,30 +240,18 @@ app.directive('lineChart', function() {
 
                     svg.append("path")
                         .attr("class", "line")
-                        .attr("d", valueline(scope.data));
+                        .attr("d", lineValue(scope.data));
 
                     svg.append("g")
                         .attr("class", "x axis")
                         .attr("transform", "translate(0," + height + ")")
                         .call(xAxis);
 
-
                     svg.append("g")
                         .attr("class", "y axis")
                         .call(yAxis);
-
-
-                    function zoomed() {
-                        svg.select("xAxis")
-                            .call(xAxis);
-
-                        svg.attr('transform', 'translate(' + d3.event.translate[0] + ')scale(' + d3.event.scale + ',1)');
-                    }
-
                 }
-
             });
         }
     };
-
 });
