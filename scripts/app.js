@@ -217,12 +217,19 @@ app.directive('lineChart', function() {
                         .attr("width", width + margin.left + margin.right)
                         .attr("height", height + margin.top + margin.bottom)
                         .call(d3.behavior.zoom()
-                        .translate([0, 0])
-                        .scale(1.0)
-                        .scaleExtent([0.5, 2.0])
-                        .on("zoom", function() {
-                            svg.attr("transform", "translate(" + (d3.event.translate[0] + margin.left ) + "," + margin.top + ") scale(" + d3.event.scale + ")");
-                        }))
+
+                            .translate([0, 0])
+                            .scale(1.0)
+                            .on("zoom", function() {
+                                var translate = d3.event.translate;
+                                var xTranslate = translate[0];
+                                var yTranslate = translate[1];
+                                xTranslate = Math.min(margin.left, xTranslate + margin.left);
+                                xTranslate = Math.max(xTranslate, width - 1500);
+                                yTranslate = margin.top;
+
+                                svg.attr("transform", "translate(" + [xTranslate, yTranslate] + ") scale(" + d3.event.scale + ")");
+                            }))
                         .append("g")
                         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -231,7 +238,6 @@ app.directive('lineChart', function() {
                     scope.data.forEach(function(d) {
                         d.date = parseDate(d.date);
                         d.amount = +d.amount;
-
                     });
 
                     y.domain([0, d3.max(scope.data, function(d) {
