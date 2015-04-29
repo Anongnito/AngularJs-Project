@@ -188,74 +188,122 @@ app.directive('lineChart', function() {
         scope: {data: '=chartData'},
         link: function(scope, element) {
             scope.$watch('data', function(data) {
-                if(data) {
-                    var margin = {top: 30, right: 20, bottom: 30, left: 50},
-                        width = 600,
-                        height = 270;
+                $(window).scroll(function() {
+                    var fromTop = $(document).scrollTop();
+                    if(fromTop >= 888) {
+                        if($('#lineChart').html() == "") {
+                            doLineChart();
+                        }
+                    }
+                });
 
-                    var parseDate = d3.time.format("%Y-%m-%d").parse;
+                var fromTop = $(document).scrollTop();
+                if(fromTop >= 888) {
+                    if($('#lineChart').html() == "") {
+                        doLineChart();
+                    }
+                }
 
-                    var x = d3.time.scale().range([0, 1500]);
-                    var y = d3.scale.linear().range([height, 0]);
+                function doLineChart() {
+                    if(data) {
+                        var margin = {top: 30, right: 20, bottom: 30, left: 20},
+                            width = 600,
+                            height = 270;
 
-                    var xAxis = d3.svg.axis().scale(x)
-                        .orient("bottom").ticks(12);
+                        var parseDate = d3.time.format("%Y-%m-%d").parse;
 
-                    var yAxis = d3.svg.axis().scale(y)
-                        .orient("left").ticks(5);
+                        var x = d3.time.scale().range([0, 1500]);
+                        var y = d3.scale.linear().range([height, 0]);
 
-                    var lineValue = d3.svg.line()
-                        .x(function(d) {
-                            return x(d.date);
-                        })
-                        .y(function(d) {
-                            return y(d.amount);
+                        var xAxis = d3.svg.axis()
+                            .scale(x)
+                            .orient("bottom").ticks(12);
+
+                        var yAxis = d3.svg.axis()
+                            .scale(y)
+                            .orient("right").ticks(6);
+
+                        var startLineValue = d3.svg.line()
+                            .x(function(d) {
+                                return x(d.date);
+                            })
+                            .y(function() {
+                                return y(0);
+                            });
+
+                        var lineValue = d3.svg.line()
+                            .x(function(d) {
+                                return x(d.date);
+                            })
+                            .y(function(d) {
+                                return y(d.amount);
+                            });
+
+                        var svg = d3.select(element[0])
+                            .append("svg")
+                            .attr("width", width + margin.left + margin.right)
+                            .attr("height", height + margin.top + margin.bottom)
+                            .style("cursor", "e-resize")
+                            .call(d3.behavior.zoom()
+                                .translate([0, 0])
+                                .scale([1.0])
+                                .on("zoom", function() {
+                                    var translate = d3.event.translate;
+                                    var xTranslate = translate[0];
+                                    var yTranslate = margin.top;
+                                    xTranslate = Math.min(margin.left, xTranslate + margin.left);
+                                    xTranslate = Math.max(xTranslate, width - 1500);
+                                    svg.attr("transform", "translate(" + [xTranslate, yTranslate] + ") scale(" + d3.event.scale + ")");
+                                    svg.select('.y.axis')
+                                        .attr("transform", "translate(" + Math.max(-xTranslate, 0) + ",0)")
+                                    svg.select('.text')
+                                        .attr("transform", "translate(" + Math.max(-xTranslate, 0) + ",0)")
+
+                                }))
+                            .on("mousewheel.zoom", null)
+                            .on("DOMMouseScroll.zoom", null)
+                            .on("wheel.zoom", null)
+                            .on("dblclick.zoom", null)
+
+                            .append("g")
+                            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                        x.domain([new Date(2015, 0, 1), new Date(2015, 11, 31)]);
+
+                        scope.data.forEach(function(d) {
+                            d.date = parseDate(d.date);
+                            d.amount = +d.amount;
                         });
 
-                    var svg = d3.select(element[0])
-                        .append("svg")
-                        .attr("width", width + margin.left + margin.right)
-                        .attr("height", height + margin.top + margin.bottom)
-                        .call(d3.behavior.zoom()
+                        y.domain([0, d3.max(scope.data, function(d) {
+                            return d.amount;
+                        })]);
 
-                            .translate([0, 0])
-                            .scale(1.0)
-                            .on("zoom", function() {
-                                var translate = d3.event.translate;
-                                var xTranslate = translate[0];
-                                var yTranslate = translate[1];
-                                xTranslate = Math.min(margin.left, xTranslate + margin.left);
-                                xTranslate = Math.max(xTranslate, width - 1500);
-                                yTranslate = margin.top;
+                        svg.append("path")
+                            .attr("class", "line")
+                            .attr("d", startLineValue(scope.data))
+                            .transition()
+                            .duration(800)
+                            .attr("d", lineValue(scope.data));
 
-                                svg.attr("transform", "translate(" + [xTranslate, yTranslate] + ") scale(" + d3.event.scale + ")");
-                            }))
-                        .append("g")
-                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+                        svg.append("g")
+                            .attr("class", "x axis")
+                            .attr("transform", "translate(0," + height + ")")
+                            .call(xAxis);
 
-                    x.domain([new Date(2015, 0, 1), new Date(2015, 11, 30)]);
+                        svg.append("g")
+                            .attr("class", "y axis")
+                            .call(yAxis);
 
-                    scope.data.forEach(function(d) {
-                        d.date = parseDate(d.date);
-                        d.amount = +d.amount;
-                    });
-
-                    y.domain([0, d3.max(scope.data, function(d) {
-                        return d.amount;
-                    })]);
-
-                    svg.append("path")
-                        .attr("class", "line")
-                        .attr("d", lineValue(scope.data));
-
-                    svg.append("g")
-                        .attr("class", "x axis")
-                        .attr("transform", "translate(0," + height + ")")
-                        .call(xAxis);
-
-                    svg.append("g")
-                        .attr("class", "y axis")
-                        .call(yAxis);
+                        svg.append("text")
+                            .attr("class","text")
+                            .text("Commit time line for this project. Straight from GitHub!")
+                            .attr('x', width/4)
+                            .attr('y', -10)
+                            .style('fill', '#b5b5b5')
+                            .style('font-family', "'Open Sans', sans-serif")
+                            .style('font-size', '15px')
+                    }
                 }
             });
         }

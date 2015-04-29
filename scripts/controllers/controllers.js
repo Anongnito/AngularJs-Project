@@ -29,26 +29,35 @@
         var formatDates = function(data) {
             var isDuplicatedDate = "";
             var amount = 1;
-            for(var i = 0; i < data.length; i++) {
 
-                var fullDate = new Date(data[i].commit.author.date);
-                var dayOfMonth = fullDate.getDate();
-                var year = fullDate.getFullYear();
-                var month = fullDate.getMonth() + 1;
-                var initialDate = year + "-" + month + "-" + dayOfMonth;
+            for(var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
+                var loopDate = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
 
-                if(isDuplicatedDate == initialDate) {
-                    amount += 1;
-                    isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
-                    if(data.length - 2 == i) {
-                        homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
-                        amount = 1;
+                for(var i = 0; i < data.length; i++) {
+
+                    var fullDate = new Date(data[i].commit.author.date);
+                    var dayOfMonth = fullDate.getDate();
+                    var year = fullDate.getFullYear();
+                    var month = fullDate.getMonth() + 1;
+                    var initialDate = year + "-" + month + "-" + dayOfMonth;
+
+                    if(loopDate == initialDate) {
+                        if(isDuplicatedDate == initialDate) {
+                            amount += 1;
+                            isDuplicatedDate = year + "-" + month + "-" + dayOfMonth;
+                            if(data.length - 2 == i) {
+                                homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
+                                amount = 1;
+                            }
+                        } else {
+                            homePageInfo.setGitHubData({date: initialDate, amount: amount});
+                            amount = 1;
+                            isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
+                        }
+                    } else {
+                        homePageInfo.setGitHubData({date: loopDate, amount: 0})
+
                     }
-
-                } else {
-                    homePageInfo.setGitHubData({date: initialDate, amount: amount});
-                    amount = 1;
-                    isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
                 }
             }
             $scope.gitHubData = homePageInfo.getGitHubData();
