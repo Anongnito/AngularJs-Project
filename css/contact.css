@@ -1,0 +1,21 @@
+#fullMap {
+    height:420px;
+    width:100%;
+}
+
+#smallMaps {
+    width: 100%;
+    display: inline-flex;
+}
+
+#smallMaps li {
+    width: 33%;
+    display: inline-flex;
+}
+
+#londonMap, #leipzigMap, #stockholmMap {
+    width: 100%;
+    height: 400px;
+
+}
+

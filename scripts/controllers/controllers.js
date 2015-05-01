@@ -97,12 +97,44 @@
         }
     });
 
-    app.controller('contact', function() {
+    app.controller('contact', function($scope) {
         init();
 
-        function init() {
+        var initializeMap =  {
+            mapOptionsFullMap : {
+                zoom: 4,
+                center: new google.maps.LatLng(51.196283, 11.320633),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            mapOptionsStockholm : {
+                zoom: 8,
+                center: new google.maps.LatLng(59.332272, 18.069256),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            mapOptionsLeipzig : {
+                zoom: 8,
+                center: new google.maps.LatLng(51.328698, 12.394322),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
+            mapOptionsLondon : {
+                zoom: 8,
+                center: new google.maps.LatLng(51.560549, -0.118820),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            },
 
+            createMap: function () {
+                $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
+                $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
+                $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
+                $scope.map = new google.maps.Map(document.getElementById('londonMap'), initializeMap.mapOptionsLondon);
+            }
+
+        };
+        
+        function init() {
+            initializeMap.createMap();
         }
+
     });
 
     app.controller('products', function() {
