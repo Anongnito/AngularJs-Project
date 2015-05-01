@@ -44,8 +44,9 @@
             return gitHubData;
         };
         this.setGitHubData = function(data) {
-          gitHubData.push(data);
+            gitHubData.push(data);
         };
+
         var infoTexts = [
             {
                 id: 'allYourMoney',
@@ -74,5 +75,67 @@
             {title: 'Neutral Customers', value: 20}
         ];
         var gitHubData = [];
+
+
+    });
+
+    app.service('contact', function() {
+        this.getFullMapMarkerData = function() {
+            return fullMapMarkers;
+        };
+        this.getLondonMapMarkerData = function() {
+            return londonMapMarkers;
+        };
+        this.getLeipzigMapMarkerData = function() {
+            return leipzigMapMarkers;
+        };
+        this.getStockholmMapMarkerData = function() {
+            return stockholmMapMarkers;
+        };
+
+        var fullMapMarkers = [
+            {
+                city: 'London',
+                desc: 'Here we have our biggest office. We wont tell you the address, find it yourself.',
+                lat: 51.560549,
+                long: -0.118820
+            },
+            {
+                city: 'Stockholm',
+                desc: 'Actually, we do not have an office here, but you can make your own!',
+                lat: 59.332272,
+                long: 18.069256
+            },
+            {
+                city: 'Leipzig',
+                desc: 'No clue what is going on there.',
+                lat: 51.328698,
+                long: 12.394322
+            }
+        ];
+        var londonMapMarkers = [
+            {
+                city: 'London',
+                desc: 'That is exactly where our office is not located, trust us.',
+                lat: 51.560549,
+                long: -0.118820
+            }
+        ];
+        var leipzigMapMarkers = [
+            {
+                city: 'Leipzig',
+                desc: 'Oh we just went camping there once and we got arrested because we were tenting in the park',
+                lat: 51.328698,
+                long: 12.394322
+            }
+        ];
+        var stockholmMapMarkers = [
+            {
+                city: 'Stockholm',
+                desc: 'This empty space is ours, or yours, who knows? First come, first served.',
+                lat: 59.332272,
+                long: 18.069256
+            }
+        ]
     });
 })();

@@ -16,6 +16,7 @@
         $scope.chart2Data = [];
         $scope.infoTexts = [];
 
+
         $scope.user = 'anongnito';
         $scope.repo = 'angularjs-project';
         init();
@@ -97,14 +98,16 @@
         }
     });
 
-    app.controller('contact', function($scope) {
+    app.controller('contact', function($scope, contact) {
         var fullMap,
             londonMap,
             leipzigMap,
-            stockholmMap;
+            stockholmMap,
+            marker;
+        var infoWindow = new google.maps.InfoWindow();
 
-        var initializeMap =  {
-            mapOptionsFullMap : {
+        var initializeMap = {
+            mapOptionsFullMap: {
                 zoom: 4,
                 center: new google.maps.LatLng(51.196283, 11.320633),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -116,8 +119,8 @@
                 zoomControl: false,
                 scaleControl: false
             },
-            mapOptionsStockholm : {
-                zoom: 8,
+            mapOptionsStockholm: {
+                zoom: 15,
                 center: new google.maps.LatLng(59.332272, 18.069256),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 scrollwheel: false,
@@ -128,8 +131,8 @@
                 zoomControl: false,
                 scaleControl: false
             },
-            mapOptionsLeipzig : {
-                zoom: 8,
+            mapOptionsLeipzig: {
+                zoom: 15,
                 center: new google.maps.LatLng(51.328698, 12.394322),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 scrollwheel: false,
@@ -140,8 +143,8 @@
                 zoomControl: false,
                 scaleControl: false
             },
-            mapOptionsLondon : {
-                zoom: 8,
+            mapOptionsLondon: {
+                zoom: 15,
                 center: new google.maps.LatLng(51.560549, -0.118820),
                 mapTypeId: google.maps.MapTypeId.ROADMAP,
                 scrollwheel: false,
@@ -153,7 +156,7 @@
                 scaleControl: false
             },
 
-            afterClickOptions : {
+            afterClickOptions: {
                 scrollwheel: true,
                 navigationControl: true,
                 mapTypeControl: true,
@@ -163,18 +166,44 @@
                 scaleControl: true
             },
 
-            createMap: function () {
+            createMap: function() {
                 fullMap = $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
                 stockholmMap = $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
                 leipzigMap = $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
                 londonMap = $scope.map = new google.maps.Map(document.getElementById('londonMap'), initializeMap.mapOptionsLondon);
 
-            }
+            },
 
+            createMarker: function(data, map) {
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng(data.lat, data.long),
+                    title: data.city
+                });
+                marker.content = '<div class="infoWindowContent">' + data.desc + '</div>';
+
+                google.maps.event.addListener(marker, 'click', function() {
+                    infoWindow.setContent('<h2>' + this.title + '</h2>' + this.content);
+                    infoWindow.open(map, this);
+                });
+            }
         };
+
         init();
         function init() {
             initializeMap.createMap();
+            $scope.fullMapMarkers = contact.getFullMapMarkerData();
+            $scope.londonMapMarkers = contact.getLondonMapMarkerData();
+            $scope.leipzigMapMarkers = contact.getLeipzigMapMarkerData();
+            $scope.stockholmMapMarkers = contact.getStockholmMapMarkerData();
+
+            for(var i = 0; i < $scope.fullMapMarkers.length; i++) {
+                initializeMap.createMarker($scope.fullMapMarkers[i], fullMap);
+            }
+            initializeMap.createMarker($scope.londonMapMarkers[0], londonMap);
+            initializeMap.createMarker($scope.leipzigMapMarkers[0], leipzigMap);
+            initializeMap.createMarker($scope.stockholmMapMarkers[0], stockholmMap);
+
             google.maps.event.addListener(stockholmMap, 'click', function() {
                 stockholmMap.setOptions(initializeMap.afterClickOptions)
             });
@@ -187,6 +216,7 @@
         }
 
     });
+
 
     app.controller('products', function() {
         init();
