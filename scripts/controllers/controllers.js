@@ -98,41 +98,92 @@
     });
 
     app.controller('contact', function($scope) {
-        init();
+        var fullMap,
+            londonMap,
+            leipzigMap,
+            stockholmMap;
 
         var initializeMap =  {
             mapOptionsFullMap : {
                 zoom: 4,
                 center: new google.maps.LatLng(51.196283, 11.320633),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                draggable: false,
+                panControl: false,
+                zoomControl: false,
+                scaleControl: false
             },
             mapOptionsStockholm : {
                 zoom: 8,
                 center: new google.maps.LatLng(59.332272, 18.069256),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                draggable: false,
+                panControl: false,
+                zoomControl: false,
+                scaleControl: false
             },
             mapOptionsLeipzig : {
                 zoom: 8,
                 center: new google.maps.LatLng(51.328698, 12.394322),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                draggable: false,
+                panControl: false,
+                zoomControl: false,
+                scaleControl: false
             },
             mapOptionsLondon : {
                 zoom: 8,
                 center: new google.maps.LatLng(51.560549, -0.118820),
-                mapTypeId: google.maps.MapTypeId.ROADMAP
+                mapTypeId: google.maps.MapTypeId.ROADMAP,
+                scrollwheel: false,
+                navigationControl: false,
+                mapTypeControl: false,
+                draggable: false,
+                panControl: false,
+                zoomControl: false,
+                scaleControl: false
+            },
+
+            afterClickOptions : {
+                scrollwheel: true,
+                navigationControl: true,
+                mapTypeControl: true,
+                draggable: true,
+                panControl: true,
+                zoomControl: true,
+                scaleControl: true
             },
 
             createMap: function () {
-                $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
-                $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
-                $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
-                $scope.map = new google.maps.Map(document.getElementById('londonMap'), initializeMap.mapOptionsLondon);
+                fullMap = $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
+                stockholmMap = $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
+                leipzigMap = $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
+                londonMap = $scope.map = new google.maps.Map(document.getElementById('londonMap'), initializeMap.mapOptionsLondon);
+
             }
 
         };
-        
+        init();
         function init() {
             initializeMap.createMap();
+            google.maps.event.addListener(stockholmMap, 'click', function() {
+                stockholmMap.setOptions(initializeMap.afterClickOptions)
+            });
+            google.maps.event.addListener(leipzigMap, 'click', function() {
+                leipzigMap.setOptions(initializeMap.afterClickOptions)
+            });
+            google.maps.event.addListener(londonMap, 'click', function() {
+                londonMap.setOptions(initializeMap.afterClickOptions)
+            });
         }
 
     });
