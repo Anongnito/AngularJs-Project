@@ -130,6 +130,7 @@
                 panControl: false,
                 zoomControl: false,
                 scaleControl: false
+
             },
             mapOptionsLeipzig: {
                 zoom: 15,
@@ -166,12 +167,115 @@
                 scaleControl: true
             },
 
+            fullMapStyles:[
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [
+                        { "weight": 5 },
+                        { "visibility": "on" },
+                        { "color": "#635c38" }
+                    ]
+                },{
+                    "featureType": "water",
+                    "stylers": [
+                        { "visibility": "on" },
+                        { "color": "#c6c581" }
+                    ]
+                },{
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        { "color": "#FFFFFF" }
+                    ]
+                }
+            ],
+
+            stockholmMapStyles: [
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [
+                        { "weight": 5 },
+                        { "visibility": "on" },
+                        { "color": "#03588e" }
+                    ]
+                },{
+                    "featureType": "water",
+                    "stylers": [
+                        { "visibility": "on" },
+                        { "color": "#FFFFFF" }
+                    ]
+                },{
+                    "featureType": "road",
+                    "stylers": [
+                        { "color": "#ffcd08" }
+                    ]
+                }
+            ],
+
+            leipzigMapStyles : [
+                {
+                    "featureType": "landscape",
+                    "stylers": [
+                        { "color": "#000000" }
+                    ]
+                },{
+                    "featureType": "road",
+                    "stylers": [
+                        { "color": "#dd0000" }
+                    ]
+                },{
+                    "featureType": "poi",
+                    "stylers": [
+                        { "color": "#ffce00" }
+                    ]
+                },{
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        { "color": "#FFFFFF" }
+                    ]
+                },{
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        { "color": "#000000" }
+                    ]
+                }
+            ],
+
+            londonMapStyles: [
+                {
+                    "featureType": "landscape",
+                    "stylers": [
+                        { "color": "#00247d" }
+                    ]
+                },{
+                    "featureType": "road",
+                    "stylers": [
+                        { "weight": 0.4 },
+                        { "color": "#cf142b" }
+                    ]
+                },{
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        { "color": "#FFFFFF" }
+                    ]
+                },{
+                    "featureType": "poi",
+                    "stylers": [
+                        { "color": "#FFFFFF" }
+                    ]
+                }
+            ],
+
             createMap: function() {
                 fullMap = $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
                 stockholmMap = $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
                 leipzigMap = $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
                 londonMap = $scope.map = new google.maps.Map(document.getElementById('londonMap'), initializeMap.mapOptionsLondon);
-
+                fullMap.setOptions({styles: initializeMap.fullMapStyles});
+                stockholmMap.setOptions({styles: initializeMap.stockholmMapStyles});
+                leipzigMap.setOptions({styles: initializeMap.leipzigMapStyles});
+                londonMap.setOptions({styles: initializeMap.londonMapStyles});
             },
 
             createMarker: function(data, map) {
