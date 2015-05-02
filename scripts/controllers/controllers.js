@@ -197,18 +197,12 @@
                     "stylers": [
                         { "weight": 5 },
                         { "visibility": "on" },
-                        { "color": "#03588e" }
-                    ]
-                },{
-                    "featureType": "water",
-                    "stylers": [
-                        { "visibility": "on" },
-                        { "color": "#FFFFFF" }
+                        { "color": "#c39e6c" }
                     ]
                 },{
                     "featureType": "road",
                     "stylers": [
-                        { "color": "#ffcd08" }
+                        { "color": "#ceb874" }
                     ]
                 }
             ],
@@ -217,17 +211,17 @@
                 {
                     "featureType": "landscape",
                     "stylers": [
-                        { "color": "#000000" }
+                        { "color": "#e9e9e9" }
                     ]
                 },{
                     "featureType": "road",
                     "stylers": [
-                        { "color": "#dd0000" }
+                        { "color": "#b5b5b5" }
                     ]
                 },{
                     "featureType": "poi",
                     "stylers": [
-                        { "color": "#ffce00" }
+                        { "color": "#e9e9e9" }
                     ]
                 },{
                     "elementType": "labels.text.stroke",
