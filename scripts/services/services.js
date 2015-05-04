@@ -46,6 +46,9 @@
         this.setGitHubData = function(data) {
             gitHubData.push(data);
         };
+        this.clearGitHubData = function() {
+            gitHubData = [];
+        };
 
         var infoTexts = [
             {
