@@ -30,12 +30,12 @@
         var formatDates = function(data) {
             var isDuplicatedDate = "";
             var amount = 1;
+            var shouldAddDate;
 
-            for(var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
+            for(var d = new Date(2015, 0, 1); d <= new Date(2015, 11, 31); d.setDate(d.getDate() + 1)) {
                 var loopDate = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
-
+                shouldAddDate = true;
                 for(var i = 0; i < data.length; i++) {
-
                     var fullDate = new Date(data[i].commit.author.date);
                     var dayOfMonth = fullDate.getDate();
                     var year = fullDate.getFullYear();
@@ -49,16 +49,18 @@
                             if(data.length - 2 == i) {
                                 homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
                                 amount = 1;
+                                shouldAddDate = false;
                             }
                         } else {
                             homePageInfo.setGitHubData({date: initialDate, amount: amount});
                             amount = 1;
-                            isDuplicatedDate = year + "-" + month + "-" + dayOfMonth
+                            isDuplicatedDate = year + "-" + month + "-" + dayOfMonth;
+                            shouldAddDate = false;
                         }
-                    } else {
-                        homePageInfo.setGitHubData({date: loopDate, amount: 0})
-
                     }
+                }
+                if(shouldAddDate == true) {
+                    homePageInfo.setGitHubData({date: loopDate, amount: 0});
                 }
             }
             $scope.gitHubData = homePageInfo.getGitHubData();
