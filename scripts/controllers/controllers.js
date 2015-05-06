@@ -182,6 +182,23 @@
                     "stylers": [
                         { "weight": 5 },
                         { "visibility": "on" },
+                        { "color": "#c39e6c" }
+                    ]
+                },{
+                    "featureType": "road",
+                    "stylers": [
+                        { "color": "#ceb874" }
+                    ]
+                }
+            ],
+
+            stockholmMapStyles: [
+                {
+                    "featureType": "landscape",
+                    "elementType": "geometry",
+                    "stylers": [
+                        { "weight": 5 },
+                        { "visibility": "on" },
                         { "color": "#635c38" }
                     ]
                 },{
@@ -198,22 +215,6 @@
                 }
             ],
 
-            stockholmMapStyles: [
-                {
-                    "featureType": "landscape",
-                    "elementType": "geometry",
-                    "stylers": [
-                        { "weight": 5 },
-                        { "visibility": "on" },
-                        { "color": "#c39e6c" }
-                    ]
-                },{
-                    "featureType": "road",
-                    "stylers": [
-                        { "color": "#ceb874" }
-                    ]
-                }
-            ],
 
             leipzigMapStyles : [
                 {
@@ -248,23 +249,28 @@
                 {
                     "featureType": "landscape",
                     "stylers": [
-                        { "color": "#00247d" }
+                        { "saturation": 33 },
+                        { "gamma": 0.77 },
+                        { "hue": "#00ff66" }
                     ]
                 },{
                     "featureType": "road",
                     "stylers": [
-                        { "weight": 0.4 },
-                        { "color": "#cf142b" }
+                        { "hue": "#91ff00" },
+                        { "visibility": "on" },
+                        { "color": "#049256" },
+                        { "weight": 0.5 }
                     ]
                 },{
                     "elementType": "labels.text.fill",
                     "stylers": [
-                        { "color": "#FFFFFF" }
+                        { "color": "#ffffff" }
                     ]
                 },{
-                    "featureType": "poi",
+                    "elementType": "labels.text.stroke",
                     "stylers": [
-                        { "color": "#FFFFFF" }
+                        { "color": "#808080" },
+                        { "weight": 1.5 }
                     ]
                 }
             ],

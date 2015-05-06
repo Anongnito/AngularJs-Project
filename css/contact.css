@@ -3,13 +3,13 @@
     width:100%;
 }
 
-#smallMaps {
+#smallMaps, #names {
     width: 100%;
     display: inline-flex;
 }
 
-#smallMaps li {
-    width: 33%;
+.map, .names {
+    width: 100%;
     display: inline-flex;
 }
 
@@ -19,3 +19,28 @@
 
 }
 
+.mainHeading {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #b5b5b5;
+    padding: 50px;
+}
+
+.names h1 {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    color: #b5b5b5;
+    width: 100%;
+}
+
+#contact hr {
+    margin-bottom: 50px;
+}
+
+#contact h4 {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 15px;
+    color: #E7E7E7;
+    text-transform: uppercase
+}
