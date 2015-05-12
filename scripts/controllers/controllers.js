@@ -1,7 +1,7 @@
-(function() {
+(function () {
     "use strict";
 
-    app.controller('navigation', function($scope, navigationService) {
+    app.controller('navigation', function ($scope, navigationService) {
         $scope.navigations = [];
 
         init();
@@ -11,12 +11,11 @@
         }
     });
 
-    app.controller('homeInfoText', function($scope, $http, homePageInfo) {
+    app.controller('homeInfoText', function ($scope, $http, homePageInfo) {
         $scope.chart1Data = [];
         $scope.chart2Data = [];
         $scope.infoTexts = [];
         $scope.gitHubData = [];
-
 
 
         $scope.user = 'anongnito';
@@ -29,27 +28,27 @@
             $scope.chart1Data = homePageInfo.getChart1Data();
             $scope.chart2Data = homePageInfo.getChart2Data();
 
-            var formatDates = function(data) {
+            var formatDates = function (data) {
                 $scope.gitHubData = [];
                 var isDuplicatedDate = "";
                 var amount = 1;
                 var shouldAddDate;
 
-                for(var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
+                for (var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
                     var loopDate = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
                     shouldAddDate = true;
-                    for(var i = 0; i < data.length; i++) {
+                    for (var i = 0; i < data.length; i++) {
                         var fullDate = new Date(data[i].commit.author.date);
                         var dayOfMonth = fullDate.getDate();
                         var year = fullDate.getFullYear();
                         var month = fullDate.getMonth() + 1;
                         var initialDate = year + "-" + month + "-" + dayOfMonth;
 
-                        if(loopDate == initialDate) {
-                            if(isDuplicatedDate == initialDate) {
+                        if (loopDate == initialDate) {
+                            if (isDuplicatedDate == initialDate) {
                                 amount += 1;
                                 isDuplicatedDate = year + "-" + month + "-" + dayOfMonth;
-                                if(data.length - 2 == i) {
+                                if (data.length - 2 == i) {
                                     homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
                                     amount = 1;
                                     shouldAddDate = false;
@@ -62,7 +61,7 @@
                             }
                         }
                     }
-                    if(shouldAddDate == true) {
+                    if (shouldAddDate == true) {
                         homePageInfo.setGitHubData({date: loopDate, amount: 0});
                     }
                 }
@@ -70,7 +69,7 @@
                 homePageInfo.clearGitHubData();
             };
 
-            $scope.getCommitData = function() {
+            $scope.getCommitData = function () {
 
                 $http({
                     method: 'GET',
@@ -80,12 +79,12 @@
                     $scope.repo +
                     '/commits'
                 }).
-                    success(function(data) {
+                    success(function (data) {
                         $scope.data = formatDates(data);
                         $scope.error = '';
                     }).
-                    error(function(data, status) {
-                        if(status === 404) {
+                    error(function (data, status) {
+                        if (status === 404) {
                             $scope.error = 'That repository does not exist';
                         } else {
                             $scope.error = 'Error: ' + status;
@@ -98,21 +97,39 @@
 
     });
 
-    app.controller('about', function() {
-        init();
+    app.controller('contact', function ($scope, contact) {
 
-        function init() {
-
-        }
-    });
-
-    app.controller('contact', function($scope, contact) {
         var fullMap,
             londonMap,
             leipzigMap,
             stockholmMap,
             marker;
         var infoWindow = new google.maps.InfoWindow();
+
+        function init() {
+            initializeMap.createMap();
+            $scope.fullMapMarkers = contact.getFullMapMarkerData();
+            $scope.londonMapMarkers = contact.getLondonMapMarkerData();
+            $scope.leipzigMapMarkers = contact.getLeipzigMapMarkerData();
+            $scope.stockholmMapMarkers = contact.getStockholmMapMarkerData();
+
+            for (var i = 0; i < $scope.fullMapMarkers.length; i++) {
+                initializeMap.createMarker($scope.fullMapMarkers[i], fullMap);
+            }
+            initializeMap.createMarker($scope.londonMapMarkers[0], londonMap);
+            initializeMap.createMarker($scope.leipzigMapMarkers[0], leipzigMap);
+            initializeMap.createMarker($scope.stockholmMapMarkers[0], stockholmMap);
+
+            google.maps.event.addListener(stockholmMap, 'click', function () {
+                stockholmMap.setOptions(initializeMap.afterClickOptions)
+            });
+            google.maps.event.addListener(leipzigMap, 'click', function () {
+                leipzigMap.setOptions(initializeMap.afterClickOptions)
+            });
+            google.maps.event.addListener(londonMap, 'click', function () {
+                londonMap.setOptions(initializeMap.afterClickOptions)
+            });
+        }
 
         var initializeMap = {
             mapOptionsFullMap: {
@@ -175,19 +192,19 @@
                 scaleControl: true
             },
 
-            fullMapStyles:[
+            fullMapStyles: [
                 {
                     "featureType": "landscape",
                     "elementType": "geometry",
                     "stylers": [
-                        { "weight": 5 },
-                        { "visibility": "on" },
-                        { "color": "#c39e6c" }
+                        {"weight": 5},
+                        {"visibility": "on"},
+                        {"color": "#c39e6c"}
                     ]
-                },{
+                }, {
                     "featureType": "road",
                     "stylers": [
-                        { "color": "#ceb874" }
+                        {"color": "#ceb874"}
                     ]
                 }
             ],
@@ -197,50 +214,50 @@
                     "featureType": "landscape",
                     "elementType": "geometry",
                     "stylers": [
-                        { "weight": 5 },
-                        { "visibility": "on" },
-                        { "color": "#635c38" }
+                        {"weight": 5},
+                        {"visibility": "on"},
+                        {"color": "#635c38"}
                     ]
-                },{
+                }, {
                     "featureType": "water",
                     "stylers": [
-                        { "visibility": "on" },
-                        { "color": "#c6c581" }
+                        {"visibility": "on"},
+                        {"color": "#c6c581"}
                     ]
-                },{
+                }, {
                     "elementType": "labels.text.stroke",
                     "stylers": [
-                        { "color": "#FFFFFF" }
+                        {"color": "#FFFFFF"}
                     ]
                 }
             ],
 
 
-            leipzigMapStyles : [
+            leipzigMapStyles: [
                 {
                     "featureType": "landscape",
                     "stylers": [
-                        { "color": "#e9e9e9" }
+                        {"color": "#e9e9e9"}
                     ]
-                },{
+                }, {
                     "featureType": "road",
                     "stylers": [
-                        { "color": "#b5b5b5" }
+                        {"color": "#b5b5b5"}
                     ]
-                },{
+                }, {
                     "featureType": "poi",
                     "stylers": [
-                        { "color": "#e9e9e9" }
+                        {"color": "#e9e9e9"}
                     ]
-                },{
+                }, {
                     "elementType": "labels.text.stroke",
                     "stylers": [
-                        { "color": "#FFFFFF" }
+                        {"color": "#FFFFFF"}
                     ]
-                },{
+                }, {
                     "elementType": "labels.text.fill",
                     "stylers": [
-                        { "color": "#000000" }
+                        {"color": "#000000"}
                     ]
                 }
             ],
@@ -249,33 +266,33 @@
                 {
                     "featureType": "landscape",
                     "stylers": [
-                        { "saturation": 33 },
-                        { "gamma": 0.77 },
-                        { "hue": "#00ff66" }
+                        {"saturation": 33},
+                        {"gamma": 0.77},
+                        {"hue": "#00ff66"}
                     ]
-                },{
+                }, {
                     "featureType": "road",
                     "stylers": [
-                        { "hue": "#91ff00" },
-                        { "visibility": "on" },
-                        { "color": "#049256" },
-                        { "weight": 0.5 }
+                        {"hue": "#91ff00"},
+                        {"visibility": "on"},
+                        {"color": "#049256"},
+                        {"weight": 0.5}
                     ]
-                },{
+                }, {
                     "elementType": "labels.text.fill",
                     "stylers": [
-                        { "color": "#ffffff" }
+                        {"color": "#ffffff"}
                     ]
-                },{
+                }, {
                     "elementType": "labels.text.stroke",
                     "stylers": [
-                        { "color": "#808080" },
-                        { "weight": 1.5 }
+                        {"color": "#808080"},
+                        {"weight": 1.5}
                     ]
                 }
             ],
 
-            createMap: function() {
+            createMap: function () {
                 fullMap = $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
                 stockholmMap = $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
                 leipzigMap = $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
@@ -286,7 +303,7 @@
                 londonMap.setOptions({styles: initializeMap.londonMapStyles});
             },
 
-            createMarker: function(data, map) {
+            createMarker: function (data, map) {
                 marker = new google.maps.Marker({
                     map: map,
                     position: new google.maps.LatLng(data.lat, data.long),
@@ -294,47 +311,52 @@
                 });
                 marker.content = '<div class="infoWindowContent">' + data.desc + '</div>';
 
-                google.maps.event.addListener(marker, 'click', function() {
+                google.maps.event.addListener(marker, 'click', function () {
                     infoWindow.setContent('<h2>' + this.title + '</h2>' + this.content);
                     infoWindow.open(map, this);
                 });
             }
         };
-
         init();
-        function init() {
-            initializeMap.createMap();
-            $scope.fullMapMarkers = contact.getFullMapMarkerData();
-            $scope.londonMapMarkers = contact.getLondonMapMarkerData();
-            $scope.leipzigMapMarkers = contact.getLeipzigMapMarkerData();
-            $scope.stockholmMapMarkers = contact.getStockholmMapMarkerData();
-
-            for(var i = 0; i < $scope.fullMapMarkers.length; i++) {
-                initializeMap.createMarker($scope.fullMapMarkers[i], fullMap);
-            }
-            initializeMap.createMarker($scope.londonMapMarkers[0], londonMap);
-            initializeMap.createMarker($scope.leipzigMapMarkers[0], leipzigMap);
-            initializeMap.createMarker($scope.stockholmMapMarkers[0], stockholmMap);
-
-            google.maps.event.addListener(stockholmMap, 'click', function() {
-                stockholmMap.setOptions(initializeMap.afterClickOptions)
-            });
-            google.maps.event.addListener(leipzigMap, 'click', function() {
-                leipzigMap.setOptions(initializeMap.afterClickOptions)
-            });
-            google.maps.event.addListener(londonMap, 'click', function() {
-                londonMap.setOptions(initializeMap.afterClickOptions)
-            });
-        }
-
     });
 
 
-    app.controller('products', function() {
+    app.controller('product', function ($scope, products,$modal) {
+        $scope.products = [];
         init();
 
         function init() {
+            $scope.products = products.getProducts();
 
+
+            $scope.animationsEnabled = true;
+
+            $scope.open = function (size) {
+
+                var modalInstance = $modal.open({
+                    animation: $scope.animationsEnabled,
+                    templateUrl: 'myModalContent.html',
+                    size: size
+                });
+
+                modalInstance.result.then(function (selectedItem) {
+                    $scope.selected = selectedItem;
+                }, function () {
+                    $log.info('Modal dismissed at: ' + new Date());
+                });
+            };
+
+            $scope.toggleAnimation = function () {
+                $scope.animationsEnabled = !$scope.animationsEnabled;
+            };
+
+            $scope.ok = function () {
+                $modalInstance.close($scope.selected.item);
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
         }
     });
 })();

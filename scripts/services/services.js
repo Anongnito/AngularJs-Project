@@ -141,4 +141,54 @@
             }
         ]
     });
+
+    app.service('products', function() {
+        this.getProducts = function() {
+            return products;
+        };
+        var products = [
+            {
+                productName: 'Woman Vintage Shirt 1',
+                productPrice: '999.99£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/WomanShirt1.jpg'
+
+            },
+            {
+                productName: 'Woman Vintage Shirt 2',
+                productPrice: '2.59£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/WomanShirt2.jpg'
+
+            },
+            {
+                productName: 'Woman Super Vintage Pants 1',
+                productPrice: '56.99£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/WomanPants1.jpg'
+
+            },
+            {
+                productName: 'Woman Super Vintage Shirt 2',
+                productPrice: '56.99£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/WomanPants2.jpg'
+
+            },
+            {
+                productName: 'T-Shirt a man would never wear!',
+                productPrice: '56.99£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/ManShirt1.jpg'
+
+            },
+            {
+                productName: 'Really? A pink ..thing?',
+                productPrice: '56.99£',
+                productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
+                image: '../img/ecommerce/ManShirt2.jpg'
+
+            }
+        ]
+    })
 })();

@@ -1,0 +1,10 @@
+#products ul {
+    /*display: inline-flex;*/
+}
+
+#products ul li {
+    float: left;
+    width: 320px;
+    height: 465px;
+    margin: 80px;
+}

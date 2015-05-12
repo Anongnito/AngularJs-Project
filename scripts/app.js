@@ -1,4 +1,4 @@
-var app = angular.module('eCommerce', ['ngRoute','ngAnimate']);
+var app = angular.module('eCommerce', ['ngRoute','ngAnimate','ui.bootstrap']);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -7,7 +7,7 @@ app.config(function($routeProvider) {
             templateUrl: 'homepage.html'
         })
         .when('/products', {
-            controller: 'products',
+            controller: 'product',
             templateUrl: 'products.html'
         })
         .when('/about', {
