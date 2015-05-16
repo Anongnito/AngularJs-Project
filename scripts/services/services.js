@@ -194,7 +194,24 @@
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/ManShirt2.jpg'
 
+            },
+            {
+                id: 6,
+                productName: 'No Title',
+                productPrice: '9999.99£',
+                productDescription: 'We have no description for this, we have no clue what this is or what it is supppose to be.',
+                image: '../img/ecommerce/noClue.jpg'
+
+            },
+            {
+                id: 7,
+                productName: 'Baseball Shirt',
+                productPrice: '0.4£',
+                productDescription: 'With this shirt, you become a superstar baseball player instantly',
+                image: '../img/ecommerce/baseballShirt.jpg'
+
             }
+
         ]
     })
 

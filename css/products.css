@@ -23,3 +23,27 @@
     top:100px;
     margin-left:-200px;
 }
+
+li.ng-isolate-scope {
+    background: rgb(99, 92, 56);
+    color: white;
+}
+
+li.ng-isolate-scope a{
+    color: white;
+    border: none;
+}
+
+li.ng-isolate-scope a:hover{
+    background-color: rgb(195, 194, 120);
+    border: none;
+}
+
+.nav-tabs.nav-justified>li>a, .nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover {
+    border: none;
+}
+
+.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+    background-color: rgb(195, 194, 120);
+    color: white;
+}
