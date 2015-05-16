@@ -328,35 +328,22 @@
         function init() {
             $scope.products = products.getProducts();
 
-
-            $scope.animationsEnabled = true;
-
-            $scope.open = function (size) {
-
-                var modalInstance = $modal.open({
-                    animation: $scope.animationsEnabled,
-                    templateUrl: 'myModalContent.html',
-                    size: size
-                });
-
-                modalInstance.result.then(function (selectedItem) {
-                    $scope.selected = selectedItem;
-                }, function () {
-                    $log.info('Modal dismissed at: ' + new Date());
-                });
+            $scope.open = function() {
+                $scope.modalInstance = $modal.open({
+                    templateUrl: 'modal.html',
+                    controller: 'modalCtrl'
+                })
             };
 
-            $scope.toggleAnimation = function () {
-                $scope.animationsEnabled = !$scope.animationsEnabled;
-            };
-
-            $scope.ok = function () {
-                $modalInstance.close($scope.selected.item);
-            };
-
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
         }
     });
+
+    app.controller('modalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
+        $scope.cancel = function(){
+            $modalInstance.dismiss('canceled');
+        }; // end cancel
+        $scope.ok = function () {
+            $modalInstance.close();
+        };
+    }]);
 })();

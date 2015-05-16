@@ -126,3 +126,7 @@ hr {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
+.modal-open {
+    overflow: visible;
+}
