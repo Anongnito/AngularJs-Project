@@ -148,6 +148,7 @@
         };
         var products = [
             {
+                id: 0,
                 productName: 'Woman Vintage Shirt 1',
                 productPrice: '999.99£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -155,6 +156,7 @@
 
             },
             {
+                id: 1,
                 productName: 'Woman Vintage Shirt 2',
                 productPrice: '2.59£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -162,6 +164,7 @@
 
             },
             {
+                id: 2,
                 productName: 'Woman Super Vintage Pants 1',
                 productPrice: '56.99£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -169,6 +172,7 @@
 
             },
             {
+                id: 3,
                 productName: 'Woman Super Vintage Shirt 2',
                 productPrice: '56.99£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -176,6 +180,7 @@
 
             },
             {
+                id: 4,
                 productName: 'T-Shirt a man would never wear!',
                 productPrice: '56.99£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -183,6 +188,7 @@
 
             },
             {
+                id: 5,
                 productName: 'Really? A pink ..thing?',
                 productPrice: '56.99£',
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
@@ -191,4 +197,5 @@
             }
         ]
     })
+
 })();

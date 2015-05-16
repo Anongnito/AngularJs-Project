@@ -323,6 +323,7 @@
 
     app.controller('product', function ($scope, products,$modal) {
         $scope.products = [];
+        $scope.myInterval = 3000;
         init();
 
         function init() {
@@ -346,4 +347,6 @@
             $modalInstance.close();
         };
     }]);
+
+
 })();

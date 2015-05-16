@@ -15,14 +15,14 @@ html, body {
 }
 
 nav {
-    /*text-align: center;*/
     background: rgba(195, 194, 120, 0.92);
     height: 50px;
 }
 
-nav a {
+nav h1 {
     color: rgb(99, 92, 56);
     font-family: 'Open Sans', sans-serif;
+    margin: 0;
 }
 
 nav ul {
@@ -40,10 +40,6 @@ header {
     height: 500px;
     background: url(../img/header.png);
 
-}
-
-nav h1 {
-    margin: 0;
 }
 
 footer {

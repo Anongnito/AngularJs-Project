@@ -2,9 +2,24 @@
     /*display: inline-flex;*/
 }
 
-#products ul li {
+.productList li {
     float: left;
     width: 320px;
     height: 465px;
-    margin: 80px;
+    margin: 50px;
+}
+
+#slides_control > div{
+    height: 400px;
+}
+#slides_control img{
+    margin:auto;
+    width: 400px;
+}
+#slides_control {
+    position:absolute;
+    width: 400px;
+    left:50%;
+    top:100px;
+    margin-left:-200px;
 }
