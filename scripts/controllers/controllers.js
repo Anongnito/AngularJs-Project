@@ -324,7 +324,9 @@
     app.controller('product', function ($scope, products,$modal) {
         $scope.products = [];
         $scope.myInterval = 3000;
+        $scope.searchById = 0;
         init();
+
 
         function init() {
             $scope.products = products.getProducts();
@@ -333,9 +335,9 @@
                 $scope.modalInstance = $modal.open({
                     templateUrl: 'modal.html',
                     controller: 'modalCtrl'
-                })
-            };
+                });
 
+            };
         }
     });
 
@@ -343,10 +345,12 @@
         $scope.cancel = function(){
             $modalInstance.dismiss('canceled');
         }; // end cancel
-        $scope.ok = function () {
+        $scope.ok = function() {
             $modalInstance.close();
         };
+
     }]);
+
 
 
 })();

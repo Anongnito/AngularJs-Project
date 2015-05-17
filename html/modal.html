@@ -2,10 +2,12 @@
     <h3 class="modal-title">I'm a modal!</h3>
 </div>
 <div class="modal-body" ng-controller="product">
-
+    <input type='number' size='4' max='9999' ng-model='searchById'/>
     <ul>
-        <li ng-repeat="product in products">
+        <li ng-repeat="product in products | filter: {id: searchById}">
             <h1>{{product.productName}}</h1>
+            <h1>{{product.productDescription}}</h1>
+            <h1>{{product.productPrice}}</h1>
         </li>
     </ul>
 
