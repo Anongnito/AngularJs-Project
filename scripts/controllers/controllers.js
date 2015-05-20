@@ -324,9 +324,12 @@
     app.controller('product', function ($scope, products,$modal) {
         $scope.products = [];
         $scope.myInterval = 3000;
-        $scope.searchById = 0;
         init();
 
+        $scope.selectedImageIndex = products.getSelectedIndex();
+        $scope.selectedImageFunction = function(index) {
+            products.setSelectedIndex(index);
+        };
 
         function init() {
             $scope.products = products.getProducts();

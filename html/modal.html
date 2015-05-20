@@ -1,18 +1,17 @@
-<div class="modal-header">
-    <h3 class="modal-title">I'm a modal!</h3>
-</div>
-<div class="modal-body" ng-controller="product">
-    <input type='number' size='4' max='9999' ng-model='searchById'/>
+
+<div class="modal-body" ng-controller="product" id="productDescription">
+
     <ul>
-        <li ng-repeat="product in products | filter: {id: searchById}">
-            <h1>{{product.productName}}</h1>
-            <h1>{{product.productDescription}}</h1>
-            <h1>{{product.productPrice}}</h1>
+        <li ng-repeat="product in products | filter: {id: selectedImageIndex}" class="productInDescription">
+            <h1 class="productHeading">{{product.productName}}</h1>
+            <img src="{{product.image}}">
+            <h4>{{product.productDescription}}</h4>
+            <h1 class="price">{{product.productPrice}}</h1>
         </li>
     </ul>
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">OK</button>
-    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
+    <button class="btn btn-warning" ng-click="cancel()">Close</button>
 </div>

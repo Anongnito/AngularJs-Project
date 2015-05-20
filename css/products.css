@@ -55,3 +55,27 @@ h4.ng-binding {
     text-align: center;
     color: #b5b5b5;
 }
+
+.productList img:hover {
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: limegreen;
+    border: limegreen;
+}
+
+.productHeading {
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+    font-size: 30px;
+    color: #b5b5b5;
+}
+
+.productInDescription {
+    text-align: center;
+}
+
+.productInDescription .price{
+    color: limegreen;
+}

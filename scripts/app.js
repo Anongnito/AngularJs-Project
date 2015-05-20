@@ -222,7 +222,8 @@ app.directive('lineChart', function() {
 
                         var yAxis = d3.svg.axis()
                             .scale(y)
-                            .orient("right").ticks(8);
+                            .orient("right").ticks(data.amount);
+
 
                         var startLineValue = d3.svg.line()
                             .x(function(d) {
@@ -247,7 +248,7 @@ app.directive('lineChart', function() {
                             .style("cursor", "e-resize")
                             .call(d3.behavior.zoom()
                                 .translate([0, 0])
-                                .scale([1.0])
+                                .scale([1])
                                 .on("zoom", function() {
                                     var translate = d3.event.translate;
                                     var xTranslate = translate[0];
@@ -316,3 +317,4 @@ app.directive('disableNgAnimate', ['$animate', function($animate) {
         }
     };
 }]);
+

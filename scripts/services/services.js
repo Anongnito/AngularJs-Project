@@ -146,6 +146,13 @@
         this.getProducts = function() {
             return products;
         };
+        this.getSelectedIndex = function() {
+            return selectedIndex;
+        };
+        this.setSelectedIndex = function(index) {
+            selectedIndex = index;
+            console.log(selectedIndex)
+        };
         var products = [
             {
                 id: 0,
@@ -212,7 +219,9 @@
 
             }
 
-        ]
-    })
+        ];
+
+        var selectedIndex = 0;
+    });
 
 })();
