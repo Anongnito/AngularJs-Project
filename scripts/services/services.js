@@ -151,7 +151,6 @@
         };
         this.setSelectedIndex = function(index) {
             selectedIndex = index;
-            console.log(selectedIndex)
         };
         var products = [
             {

@@ -4,7 +4,7 @@
     <ul>
         <li ng-repeat="product in products | filter: {id: selectedImageIndex}" class="productInDescription">
             <h1 class="productHeading">{{product.productName}}</h1>
-            <img src="{{product.image}}">
+            <img ng-src="{{product.image}}">
             <h4>{{product.productDescription}}</h4>
             <h1 class="price">{{product.productPrice}}</h1>
         </li>

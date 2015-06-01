@@ -19,7 +19,7 @@
                 <div>
                     <carousel  disable-ng-animate interval="myInterval">
                         <slide ng-repeat="product in products" active="product.active">
-                            <img ng-src="{{product.image}}" ng-click="open()">
+                            <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
                             <div class="carousel-caption">
                                 <h4>{{product.productName}}</h4>
                             </div>
