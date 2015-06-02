@@ -1,17 +1,19 @@
-
-<div class="modal-body" ng-controller="product" id="productDescription">
+<section  ng-controller="product">
+<div class="modal-body" id="productDescription">
 
     <ul>
         <li ng-repeat="product in products | filter: {id: selectedImageIndex}" class="productInDescription">
             <h1 class="productHeading">{{product.productName}}</h1>
             <img ng-src="{{product.image}}">
             <h4>{{product.productDescription}}</h4>
-            <h1 class="price">{{product.productPrice}}</h1>
+            <h1 class="price">{{product.productPrice | currency:"&pound"}}</h1>
         </li>
     </ul>
 
 </div>
 <div class="modal-footer">
-    <button class="btn btn-primary" ng-click="ok()">Add To Cart</button>
+    <button class="btn btn-primary" ng-click="addItem()">Add To Cart</button>
     <button class="btn btn-warning" ng-click="cancel()">Close</button>
 </div>
+
+    </section>

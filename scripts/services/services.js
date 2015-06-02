@@ -152,11 +152,20 @@
         this.setSelectedIndex = function(index) {
             selectedIndex = index;
         };
+        this.getItemsInCart = function() {
+            return shoppingCart;
+        };
+        this.setItemsIntoCart = function(items) {
+            shoppingCart.push(items);
+        };
+        this.getProductByIndex = function(index) {
+            return products[index];
+        };
         var products = [
             {
                 id: 0,
                 productName: 'Woman Vintage Shirt 1',
-                productPrice: '999.99£',
+                productPrice: 999.99,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/WomanShirt1.jpg'
 
@@ -164,7 +173,7 @@
             {
                 id: 1,
                 productName: 'Woman Vintage Shirt 2',
-                productPrice: '2.59£',
+                productPrice: 2.59,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/WomanShirt2.jpg'
 
@@ -172,7 +181,7 @@
             {
                 id: 2,
                 productName: 'Woman Super Vintage Pants 1',
-                productPrice: '56.99£',
+                productPrice: 56.99,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/WomanPants1.jpg'
 
@@ -180,7 +189,7 @@
             {
                 id: 3,
                 productName: 'Woman Super Vintage Shirt 2',
-                productPrice: '56.99£',
+                productPrice: 22.99,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/WomanPants2.jpg'
 
@@ -188,7 +197,7 @@
             {
                 id: 4,
                 productName: 'T-Shirt a man would never wear!',
-                productPrice: '56.99£',
+                productPrice: 663.99,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/ManShirt1.jpg'
 
@@ -196,7 +205,7 @@
             {
                 id: 5,
                 productName: 'Really? A pink ..thing?',
-                productPrice: '56.99£',
+                productPrice: 1.99,
                 productDescription: 'Yo! This shirt will blow your socks off! Oh wait, you are a hipster, you have no socks to begin with!',
                 image: '../img/ecommerce/ManShirt2.jpg'
 
@@ -204,7 +213,7 @@
             {
                 id: 6,
                 productName: 'No Title',
-                productPrice: '9999.99£',
+                productPrice: 9999.99,
                 productDescription: 'We have no description for this, we have no clue what this is or what it is supppose to be.',
                 image: '../img/ecommerce/noClue.jpg'
 
@@ -212,7 +221,7 @@
             {
                 id: 7,
                 productName: 'Baseball Shirt',
-                productPrice: '0.4£',
+                productPrice: 0.4,
                 productDescription: 'With this shirt, you become a superstar baseball player instantly',
                 image: '../img/ecommerce/baseballShirt.jpg'
 
@@ -221,6 +230,12 @@
         ];
 
         var selectedIndex = 0;
+
+        var shoppingCart = [];
+    });
+
+    app.service('shoppingCart', function() {
+
     });
 
 })();

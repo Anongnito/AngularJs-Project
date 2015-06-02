@@ -8,6 +8,15 @@
 
         function init() {
             $scope.navigations = navigationService.getNavigation();
+            $scope.shoppingCart = function() {
+                console.log('opened')
+                $scope.dynamicPopover = {
+
+                    content: 'Hello, World!',
+                    templateUrl: 'shoppingCart.html',
+                    title: 'Title'
+                };
+            }
         }
     });
 
@@ -321,19 +330,18 @@
     });
 
 
-    app.controller('product', function ($scope, products,$modal) {
+    app.controller('product', function ($scope, products, $modal) {
         $scope.products = [];
         $scope.myInterval = 3000;
-        init();
 
-        $scope.selectedImageIndex = products.getSelectedIndex();
-        $scope.selectedImageFunction = function(index) {
-            products.setSelectedIndex(index);
-        };
+        init();
 
         function init() {
             $scope.products = products.getProducts();
-
+            $scope.selectedImageIndex = products.getSelectedIndex();
+            $scope.selectedImageFunction = function(index) {
+                products.setSelectedIndex(index);
+            };
             $scope.open = function() {
                 $scope.modalInstance = $modal.open({
                     templateUrl: 'modal.html',
@@ -341,6 +349,21 @@
                 });
 
             };
+
+            $scope.addItem = function() {
+                $scope.selectedProduct = products.getProductByIndex($scope.selectedImageIndex);
+                products.setItemsIntoCart($scope.selectedProduct);
+            };
+
+            $scope.total = function() {
+                var total = 0;
+                angular.forEach($scope.shoppingCart, function(product) {
+                    total += product.productPrice ;
+                });
+
+                return total;
+            };
+            $scope.shoppingCart = products.getItemsInCart();
         }
     });
 
@@ -348,12 +371,6 @@
         $scope.cancel = function(){
             $modalInstance.dismiss('canceled');
         }; // end cancel
-        $scope.ok = function() {
-            $modalInstance.close();
-        };
-
     }]);
-
-
 
 })();

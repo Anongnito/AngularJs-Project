@@ -13,6 +13,16 @@
                     <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
                 </li>
             </ul>
+                <div>
+                    <ul>
+                        <li ng-repeat="product in shoppingCart track by $index">
+                            <h1>{{product.productPrice | currency:"&pound"}}</h1>
+                            <h4>{{product.productName}}</h4>
+                        </li>
+
+                    </ul>
+                    <h1>Total: {{total() | currency:"&pound"}}</h1>
+                </div>
             </tab>
             <tab heading="The Product Carousel">
                 <div  id="slides_control">
