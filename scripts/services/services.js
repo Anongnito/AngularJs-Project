@@ -161,6 +161,9 @@
         this.getProductByIndex = function(index) {
             return products[index];
         };
+        this.clearShoppingCart = function() {
+            shoppingCart = [];
+        };
         var products = [
             {
                 id: 0,
@@ -232,10 +235,6 @@
         var selectedIndex = 0;
 
         var shoppingCart = [];
-    });
-
-    app.service('shoppingCart', function() {
-
     });
 
 })();

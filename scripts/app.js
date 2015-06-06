@@ -1,4 +1,4 @@
-var app = angular.module('eCommerce', ['ngRoute','ngAnimate','ui.bootstrap']);
+var app = angular.module('eCommerce', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
 
 app.config(function($routeProvider) {
     $routeProvider
@@ -295,9 +295,9 @@ app.directive('lineChart', function() {
                             .call(yAxis);
 
                         svg.append("text")
-                            .attr("class","text")
+                            .attr("class", "text")
                             .text("Commit time line for this project. Straight from GitHub!")
-                            .attr('x', width/4)
+                            .attr('x', width / 4)
                             .attr('y', -10)
                             .style('fill', '#b5b5b5')
                             .style('font-family', "'Open Sans', sans-serif")
@@ -318,7 +318,7 @@ app.directive('disableNgAnimate', ['$animate', function($animate) {
     };
 }]);
 
-app.directive('openCart', function(){
+app.directive('openCart', function() {
     return {
         restrict: 'A',
         link: function() {

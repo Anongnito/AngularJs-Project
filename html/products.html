@@ -2,40 +2,43 @@
     <section id="products">
 
 
-
         <tabset justified="true">
 
             <tab heading="Product Gallery">
                 <div><h1>{{selected.value}}</h1></div>
 
                 <ul class="productList">
-                <li ng-repeat="product in products" id="{{product.id}}">
-                    <h4>{{product.productName}}</h4>
-                    <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
-                </li>
-            </ul>
+                    <li ng-repeat="product in products" id="{{product.id}}">
+                        <h4>{{product.productName}}</h4>
+                        <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
+                    </li>
+                </ul>
                 <div>
-                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl" class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png"></button>
-
+                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl"
+                            class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png">
+                    </button>
                 </div>
             </tab>
             <tab heading="The Product Carousel">
-                <div  id="slides_control">
+                <div id="slides_control">
 
-                <div>
-                    <carousel  disable-ng-animate interval="myInterval">
-                        <slide ng-repeat="product in products" active="product.active">
-                            <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
-                            <div class="carousel-caption">
-                                <h4>{{product.productName}}</h4>
-                            </div>
-                        </slide>
-                    </carousel>
+                    <div>
+                        <carousel disable-ng-animate interval="myInterval">
+                            <slide ng-repeat="product in products" active="product.active">
+                                <img ng-src="{{product.image}}" ng-click="open();selectedImageFunction($index)">
+
+                                <div class="carousel-caption">
+                                    <h4>{{product.productName}}</h4>
+                                </div>
+                            </slide>
+                        </carousel>
+                    </div>
+
                 </div>
-
-            </div>
                 <div style="float:right;margin-right: 100px;margin-top: 25px">
-                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl" class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png"></button>
+                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl"
+                            class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png">
+                    </button>
                 </div>
             </tab>
         </tabset>

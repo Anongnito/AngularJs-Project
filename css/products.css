@@ -9,20 +9,23 @@
     margin: 50px;
 }
 
-#slides_control > div{
+#slides_control > div {
     height: 400px;
 }
-#slides_control img{
-    margin:auto;
+
+#slides_control img {
+    margin: auto;
     width: 400px;
 }
+
 #slides_control {
-    position:absolute;
+    position: absolute;
     width: 400px;
-    left:50%;
-    top:100px;
-    margin-left:-200px;
+    left: 50%;
+    top: 100px;
+    margin-left: -200px;
 }
+
 .carousel-caption .ng-binding {
     font-family: 'Open Sans', sans-serif;
     color: white;
@@ -33,23 +36,24 @@ li.ng-isolate-scope {
     color: white;
 }
 
-li.ng-isolate-scope a{
+li.ng-isolate-scope a {
     color: white;
     font-family: 'Open Sans', sans-serif;
 }
 
-li.ng-isolate-scope a:hover{
+li.ng-isolate-scope a:hover {
     background-color: rgb(195, 194, 120);
 }
 
-.nav-tabs.nav-justified>li>a, .nav-tabs.nav-justified>.active>a, .nav-tabs.nav-justified>.active>a:focus, .nav-tabs.nav-justified>.active>a:hover {
+.nav-tabs.nav-justified > li > a, .nav-tabs.nav-justified > .active > a, .nav-tabs.nav-justified > .active > a:focus, .nav-tabs.nav-justified > .active > a:hover {
     border: none;
 }
 
-.nav-tabs>li.active>a, .nav-tabs>li.active>a:focus, .nav-tabs>li.active>a:hover {
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
     background-color: rgb(195, 194, 120);
     color: white;
 }
+
 h4.ng-binding {
     font-family: 'Open Sans', sans-serif;
     text-align: center;
@@ -76,6 +80,6 @@ h4.ng-binding {
     text-align: center;
 }
 
-.productInDescription .price{
+.productInDescription .price {
     color: limegreen;
 }

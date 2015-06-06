@@ -1,7 +1,7 @@
-(function () {
+(function() {
     "use strict";
 
-    app.controller('navigation', function ($scope, navigationService) {
+    app.controller('navigation', function($scope, navigationService) {
         $scope.navigations = [];
 
         init();
@@ -20,7 +20,7 @@
         }
     });
 
-    app.controller('homeInfoText', function ($scope, $http, homePageInfo) {
+    app.controller('homeInfoText', function($scope, $http, homePageInfo) {
         $scope.chart1Data = [];
         $scope.chart2Data = [];
         $scope.infoTexts = [];
@@ -37,7 +37,7 @@
             $scope.chart1Data = homePageInfo.getChart1Data();
             $scope.chart2Data = homePageInfo.getChart2Data();
 
-            var formatDates = function (data) {
+            var formatDates = function(data) {
                 $scope.gitHubData = [];
                 var isDuplicatedDate = "";
                 var amount = 1;
@@ -53,11 +53,11 @@
                         var month = fullDate.getMonth() + 1;
                         var initialDate = year + "-" + month + "-" + dayOfMonth;
 
-                        if (loopDate == initialDate) {
-                            if (isDuplicatedDate == initialDate) {
+                        if(loopDate == initialDate) {
+                            if(isDuplicatedDate == initialDate) {
                                 amount += 1;
                                 isDuplicatedDate = year + "-" + month + "-" + dayOfMonth;
-                                if (data.length - 2 == i) {
+                                if(data.length - 2 == i) {
                                     homePageInfo.setGitHubData({date: isDuplicatedDate, amount: amount});
                                     amount = 1;
                                     shouldAddDate = false;
@@ -70,7 +70,7 @@
                             }
                         }
                     }
-                    if (shouldAddDate == true) {
+                    if(shouldAddDate == true) {
                         homePageInfo.setGitHubData({date: loopDate, amount: 0});
                     }
                 }
@@ -78,7 +78,7 @@
                 homePageInfo.clearGitHubData();
             };
 
-            $scope.getCommitData = function () {
+            $scope.getCommitData = function() {
 
                 $http({
                     method: 'GET',
@@ -88,12 +88,12 @@
                     $scope.repo +
                     '/commits'
                 }).
-                    success(function (data) {
+                    success(function(data) {
                         $scope.data = formatDates(data);
                         $scope.error = '';
                     }).
-                    error(function (data, status) {
-                        if (status === 404) {
+                    error(function(data, status) {
+                        if(status === 404) {
                             $scope.error = 'That repository does not exist';
                         } else {
                             $scope.error = 'Error: ' + status;
@@ -106,7 +106,7 @@
 
     });
 
-    app.controller('contact', function ($scope, contact) {
+    app.controller('contact', function($scope, contact) {
 
         var fullMap,
             londonMap,
@@ -129,13 +129,13 @@
             initializeMap.createMarker($scope.leipzigMapMarkers[0], leipzigMap);
             initializeMap.createMarker($scope.stockholmMapMarkers[0], stockholmMap);
 
-            google.maps.event.addListener(stockholmMap, 'click', function () {
+            google.maps.event.addListener(stockholmMap, 'click', function() {
                 stockholmMap.setOptions(initializeMap.afterClickOptions)
             });
-            google.maps.event.addListener(leipzigMap, 'click', function () {
+            google.maps.event.addListener(leipzigMap, 'click', function() {
                 leipzigMap.setOptions(initializeMap.afterClickOptions)
             });
-            google.maps.event.addListener(londonMap, 'click', function () {
+            google.maps.event.addListener(londonMap, 'click', function() {
                 londonMap.setOptions(initializeMap.afterClickOptions)
             });
         }
@@ -301,7 +301,7 @@
                 }
             ],
 
-            createMap: function () {
+            createMap: function() {
                 fullMap = $scope.map = new google.maps.Map(document.getElementById('fullMap'), initializeMap.mapOptionsFullMap);
                 stockholmMap = $scope.map = new google.maps.Map(document.getElementById('stockholmMap'), initializeMap.mapOptionsStockholm);
                 leipzigMap = $scope.map = new google.maps.Map(document.getElementById('leipzigMap'), initializeMap.mapOptionsLeipzig);
@@ -312,7 +312,7 @@
                 londonMap.setOptions({styles: initializeMap.londonMapStyles});
             },
 
-            createMarker: function (data, map) {
+            createMarker: function(data, map) {
                 marker = new google.maps.Marker({
                     map: map,
                     position: new google.maps.LatLng(data.lat, data.long),
@@ -320,7 +320,7 @@
                 });
                 marker.content = '<div class="infoWindowContent">' + data.desc + '</div>';
 
-                google.maps.event.addListener(marker, 'click', function () {
+                google.maps.event.addListener(marker, 'click', function() {
                     infoWindow.setContent('<h2>' + this.title + '</h2>' + this.content);
                     infoWindow.open(map, this);
                 });
@@ -330,7 +330,7 @@
     });
 
 
-    app.controller('product', function ($scope, products, $modal, $timeout) {
+    app.controller('product', function($scope, products, $modal, $timeout) {
         $scope.products = [];
         $scope.myInterval = 3000;
 
@@ -350,7 +350,6 @@
 
             };
 
-
             $scope.addItem = function() {
                 $scope.selectedProduct = products.getProductByIndex($scope.selectedImageIndex);
                 products.setItemsIntoCart($scope.selectedProduct);
@@ -360,16 +359,17 @@
             $scope.total = function() {
                 var total = 0;
                 angular.forEach($scope.shoppingCart, function(product) {
-                    total += product.productPrice ;
+                    total += product.productPrice;
                 });
 
                 return total;
             };
+
             $scope.shoppingCart = products.getItemsInCart();
 
-            $scope.shoppingCartPopover = {
-                templateUrl: 'shoppingCart.html',
-                title: 'Shopping Cart'
+            $scope.clearCart = function() {
+                $scope.shoppingCart = products.clearShoppingCart();
+                $scope.shoppingCart = products.getItemsInCart();
             };
 
             function openCart() {
@@ -378,16 +378,22 @@
                 }
                 $timeout(closeCart, 1000);
             }
+
             function closeCart() {
                 if($('.popover').length > 0) {
                     $('.shoppingCartBtn').click();
                 }
             }
+
+            $scope.shoppingCartPopover = {
+                templateUrl: 'shoppingCart.html',
+                title: 'Shopping Cart'
+            };
         }
     });
 
     app.controller('modalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
-        $scope.cancel = function(){
+        $scope.cancel = function() {
             $modalInstance.dismiss('canceled');
         }; // end cancel
     }]);

@@ -4,7 +4,7 @@
             <h1>{{product.productPrice | currency:"&pound"}}</h1>
             <h4>{{product.productName}}</h4>
         </li>
-
+        <button ng-click="clearCart();" class="btn btn-default">Clear cart!</button>
     </ul>
     <h1>Total: {{total() | currency:"&pound"}}</h1>
 </div>
