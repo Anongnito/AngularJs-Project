@@ -4,6 +4,7 @@
 
 
         <tabset justified="true">
+
             <tab heading="Product Gallery">
                 <div><h1>{{selected.value}}</h1></div>
 
@@ -14,18 +15,13 @@
                 </li>
             </ul>
                 <div>
-                    <ul>
-                        <li ng-repeat="product in shoppingCart track by $index">
-                            <h1>{{product.productPrice | currency:"&pound"}}</h1>
-                            <h4>{{product.productName}}</h4>
-                        </li>
+                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl" class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png"></button>
 
-                    </ul>
-                    <h1>Total: {{total() | currency:"&pound"}}</h1>
                 </div>
             </tab>
             <tab heading="The Product Carousel">
                 <div  id="slides_control">
+
                 <div>
                     <carousel  disable-ng-animate interval="myInterval">
                         <slide ng-repeat="product in products" active="product.active">
@@ -36,7 +32,11 @@
                         </slide>
                     </carousel>
                 </div>
+
             </div>
+                <div style="float:right;margin-right: 100px;margin-top: 25px">
+                    <button popover-placement="bottom" popover-template="shoppingCartPopover.templateUrl" class="btn btn-default shoppingCartBtn"><img src="../img/ecommerce/shoppingCart.png"></button>
+                </div>
             </tab>
         </tabset>
 

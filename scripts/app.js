@@ -318,3 +318,12 @@ app.directive('disableNgAnimate', ['$animate', function($animate) {
     };
 }]);
 
+app.directive('openCart', function(){
+    return {
+        restrict: 'A',
+        link: function() {
+
+        }
+    }
+});
+

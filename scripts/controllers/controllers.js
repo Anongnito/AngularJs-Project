@@ -330,7 +330,7 @@
     });
 
 
-    app.controller('product', function ($scope, products, $modal) {
+    app.controller('product', function ($scope, products, $modal, $timeout) {
         $scope.products = [];
         $scope.myInterval = 3000;
 
@@ -350,9 +350,11 @@
 
             };
 
+
             $scope.addItem = function() {
                 $scope.selectedProduct = products.getProductByIndex($scope.selectedImageIndex);
                 products.setItemsIntoCart($scope.selectedProduct);
+                $timeout(openCart, 200);
             };
 
             $scope.total = function() {
@@ -364,6 +366,23 @@
                 return total;
             };
             $scope.shoppingCart = products.getItemsInCart();
+
+            $scope.shoppingCartPopover = {
+                templateUrl: 'shoppingCart.html',
+                title: 'Shopping Cart'
+            };
+
+            function openCart() {
+                if($('.popover').length <= 0) {
+                    $('.shoppingCartBtn').click();
+                }
+                $timeout(closeCart, 1000);
+            }
+            function closeCart() {
+                if($('.popover').length > 0) {
+                    $('.shoppingCartBtn').click();
+                }
+            }
         }
     });
 
