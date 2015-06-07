@@ -347,7 +347,10 @@
                     templateUrl: 'modal.html',
                     controller: 'modalCtrl'
                 });
+            };
 
+            $scope.removeItemFromCart = function(index) {
+                products.removeItemFromCart(index);
             };
 
             $scope.addItem = function() {

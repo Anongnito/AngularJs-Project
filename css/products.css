@@ -83,3 +83,16 @@ h4.ng-binding {
 .productInDescription .price {
     color: limegreen;
 }
+
+.cart {
+    text-align: left;
+}
+
+.cart .price {
+    color: limegreen;
+    font-size: 12px;
+}
+
+.cart .heading {
+    font-size: 15px;
+}

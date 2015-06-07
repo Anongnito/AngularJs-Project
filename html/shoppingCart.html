@@ -1,8 +1,10 @@
 <div class="form-group">
     <ul>
-        <li ng-repeat="product in shoppingCart track by $index">
-            <h1>{{product.productPrice | currency:"&pound"}}</h1>
-            <h4>{{product.productName}}</h4>
+        <li ng-repeat="product in shoppingCart track by $index" class="cart">
+            <h4 class="heading">{{product.productName}}</h4>
+            <h1 class="price">{{product.productPrice | currency:"&pound"}}</h1>
+            <a ng-click="removeItemFromCart($index)" href="">X Remove</a>
+            <hr>
         </li>
         <button ng-click="clearCart();" class="btn btn-default">Clear cart!</button>
     </ul>

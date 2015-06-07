@@ -164,6 +164,11 @@
         this.clearShoppingCart = function() {
             shoppingCart = [];
         };
+        this.removeItemFromCart = function(index) {
+            if (index > -1) {
+                shoppingCart.splice(index, 1);
+            }
+        }
         var products = [
             {
                 id: 0,
