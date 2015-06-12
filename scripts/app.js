@@ -1,24 +1,29 @@
-var app = angular.module('eCommerce', ['ngRoute', 'ngAnimate', 'ui.bootstrap']);
+var app = angular.module('eCommerce', ['ngRoute','ui.router', 'ngAnimate', 'ui.bootstrap']);
 
-app.config(function($routeProvider) {
-    $routeProvider
-        .when('/', {
+app.config(function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/');
+    $stateProvider
+        .state('/', {
+            url: '/',
             controller: 'homeInfoText',
             templateUrl: 'homepage.html'
         })
-        .when('/products', {
+        .state('productPage', {
+            url: '/products',
             controller: 'product',
             templateUrl: 'products.html'
         })
-        .when('/about', {
+        .state('aboutPage', {
+            url: '/about',
             controller: 'about',
             templateUrl: 'about.html'
         })
-        .when('/contact', {
+        .state('contactPage', {
+            url: '/contact',
             controller: 'contact',
             templateUrl: 'contact.html'
-        })
-        .otherwise({redirectTo: '/'});
+        });
+
 
 });
 
