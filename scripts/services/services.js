@@ -165,7 +165,7 @@
             shoppingCart = [];
         };
         this.removeItemFromCart = function(index) {
-            if (index > -1) {
+            if(index > -1) {
                 shoppingCart.splice(index, 1);
             }
         };
@@ -254,16 +254,36 @@
         ]
     });
 
-    app.service('loginModal', function ($modal, $rootScope) {
-
+    app.service('loginModal', function($modal, $rootScope) {
         return function() {
             var instance = $modal.open({
                 templateUrl: 'loginModal.html',
                 controller: 'LoginModalCtrl'
             });
-
             return instance.result.then($rootScope.isLoggedIn);
         };
-
     });
+
+    app.service('AuthenticationService', ['$http', '$rootScope', '$timeout', function($http, $rootScope, $timeout) {
+        var service = {};
+
+        service.Login = function(username, password, callback) {
+
+            //fake login
+            $timeout(function() {
+                var response = {success: username === 'test' && password === 'test'};
+                if(!response.success) {
+                    response.message = 'Username or password is incorrect';
+                }
+                response.isLoggedIn = true;
+                callback(response);
+            }, 1000);
+
+            //$http.post('/api/authenticate', { username: username, password: password })
+            //    .success(function (response) {
+            //        callback(response);
+            //    });
+        };
+        return service;
+    }]);
 })();
