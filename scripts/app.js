@@ -1,4 +1,4 @@
-var app = angular.module('eCommerce', ['ngRoute','ui.router', 'ngAnimate', 'ui.bootstrap']);
+var app = angular.module('eCommerce', ['ngRoute', 'ui.router', 'ngAnimate', 'ui.bootstrap']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
@@ -6,26 +6,84 @@ app.config(function($stateProvider, $urlRouterProvider) {
         .state('/', {
             url: '/',
             controller: 'homeInfoText',
-            templateUrl: 'homepage.html'
+            templateUrl: 'homepage.html',
+            data: {
+                requireLogin: false
+            }
         })
         .state('productPage', {
             url: '/products',
             controller: 'product',
-            templateUrl: 'products.html'
+            templateUrl: 'products.html',
+            data: {
+                requireLogin: false
+            }
         })
         .state('aboutPage', {
             url: '/about',
             controller: 'about',
-            templateUrl: 'about.html'
+            templateUrl: 'about.html',
+            data: {
+                requireLogin: true
+            }
         })
         .state('contactPage', {
             url: '/contact',
             controller: 'contact',
-            templateUrl: 'contact.html'
+            templateUrl: 'contact.html',
+            data: {
+                requireLogin: false
+            }
         });
 
 
 });
+
+app.run(function($rootScope, $state, loginModal) {
+
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+        var requireLogin = toState.data.requireLogin;
+
+        if(requireLogin && typeof $rootScope.isLoggedIn === 'undefined') {
+            event.preventDefault();
+
+            loginModal()
+                .then(function() {
+                    return $state.go(toState.name, toParams);
+                })
+                .catch(function() {
+                    return $state.go('aboutPage');
+                });
+        }
+    });
+
+});
+
+app.service('AuthenticationService', ['$http', '$rootScope', '$timeout',
+    function($http, $rootScope, $timeout) {
+        var service = {};
+
+        service.Login = function(username, password, callback) {
+
+            //fake login
+            $timeout(function() {
+                var response = {success: username === 'test' && password === 'test'};
+                if(!response.success) {
+                    response.message = 'Username or password is incorrect';
+                }
+                response.isLoggedIn = true;
+                callback(response);
+            }, 1000);
+
+
+            //$http.post('/api/authenticate', { username: username, password: password })
+            //    .success(function (response) {
+            //        callback(response);
+            //    });
+
+        };
+        return service;
+    }]);
 
 app.directive('barChart', function() {
     return {

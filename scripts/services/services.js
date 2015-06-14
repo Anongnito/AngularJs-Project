@@ -168,7 +168,7 @@
             if (index > -1) {
                 shoppingCart.splice(index, 1);
             }
-        }
+        };
         var products = [
             {
                 id: 0,
@@ -241,5 +241,29 @@
 
         var shoppingCart = [];
     });
+    app.service('about', function() {
+        this.getUsers = function() {
+            return users;
+        };
 
+        var users = [
+            {
+                username: 'Admin',
+                password: 'Admin'
+            }
+        ]
+    });
+
+    app.service('loginModal', function ($modal, $rootScope) {
+
+        return function() {
+            var instance = $modal.open({
+                templateUrl: 'loginModal.html',
+                controller: 'LoginModalCtrl'
+            });
+
+            return instance.result.then($rootScope.isLoggedIn);
+        };
+
+    });
 })();

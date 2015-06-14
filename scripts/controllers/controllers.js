@@ -43,10 +43,10 @@
                 var amount = 1;
                 var shouldAddDate;
 
-                for (var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
+                for(var d = new Date(2015, 1, 1); d <= new Date(2015, 12, 31); d.setDate(d.getDate() + 1)) {
                     var loopDate = d.getFullYear() + "-" + d.getMonth() + "-" + d.getDate();
                     shouldAddDate = true;
-                    for (var i = 0; i < data.length; i++) {
+                    for(var i = 0; i < data.length; i++) {
                         var fullDate = new Date(data[i].commit.author.date);
                         var dayOfMonth = fullDate.getDate();
                         var year = fullDate.getFullYear();
@@ -122,7 +122,7 @@
             $scope.leipzigMapMarkers = contact.getLeipzigMapMarkerData();
             $scope.stockholmMapMarkers = contact.getStockholmMapMarkerData();
 
-            for (var i = 0; i < $scope.fullMapMarkers.length; i++) {
+            for(var i = 0; i < $scope.fullMapMarkers.length; i++) {
                 initializeMap.createMarker($scope.fullMapMarkers[i], fullMap);
             }
             initializeMap.createMarker($scope.londonMapMarkers[0], londonMap);
@@ -398,7 +398,36 @@
     app.controller('modalCtrl', ['$scope', '$modalInstance', function($scope, $modalInstance) {
         $scope.cancel = function() {
             $modalInstance.dismiss('canceled');
-        }; // end cancel
+        };
     }]);
 
+    app.controller('about', function($scope) {
+        $scope.credentials = {
+            username: '',
+            password: ''
+        };
+
+
+    });
+
+    app.controller('LoginModalCtrl', ['$scope', '$rootScope', '$location', 'AuthenticationService',
+        function($scope, $rootScope, $location, AuthenticationService) {
+
+            $scope.login = function() {
+                $scope.dataLoading = true;
+                AuthenticationService.Login($scope.username, $scope.password, function(response) {
+                    if(response.success) {
+                        $location.path('/about');
+                        $rootScope.isLoggedIn = response.isLoggedIn;
+                        $scope.cancel();
+                    } else {
+                        $scope.dataLoading = false;
+                    }
+                });
+            };
+            $scope.cancel = function() {
+                $scope.$dismiss();
+            }
+
+        }]);
 })();
