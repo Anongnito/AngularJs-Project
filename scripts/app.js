@@ -27,6 +27,14 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 requireLogin: true
             }
         })
+        .state('errorPage', {
+            url: '/errorView',
+            templateUrl: 'pleaseLogIn.html',
+            controller: 'errorCtrl',
+            data: {
+                requireLogin: false
+            }
+        })
         .state('contactPage', {
             url: '/contact',
             controller: 'contact',
@@ -36,24 +44,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
             }
         });
 
-
 });
 
 app.run(function($rootScope, $state, loginModal) {
-
+    $rootScope.isLoggedIn = false;
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
         var requireLogin = toState.data.requireLogin;
 
-        if(requireLogin && typeof $rootScope.isLoggedIn === 'undefined') {
+        if(requireLogin == true && $rootScope.isLoggedIn == false) {
             event.preventDefault();
-
-            loginModal()
-                .then(function() {
-                    return $state.go(toState.name, toParams);
-                })
-                .catch(function() {
-                    return $state.go('aboutPage');
-                });
+            loginModal();
         }
     });
 

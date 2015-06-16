@@ -406,26 +406,33 @@
             username: '',
             password: ''
         };
-
-
+    });
+    app.controller('errorCtrl', function($scope) {
+        $scope.isLoggedIn = [];
     });
 
     app.controller('LoginModalCtrl', ['$scope', '$rootScope', '$location', 'AuthenticationService',
         function($scope, $rootScope, $location, AuthenticationService) {
 
             $scope.login = function() {
-                $scope.dataLoading = true;
+
                 AuthenticationService.Login($scope.username, $scope.password, function(response) {
                     if(response.success) {
+                        $scope.cancel();
                         $location.path('/about');
                         $rootScope.isLoggedIn = response.isLoggedIn;
-                        $scope.cancel();
                     } else {
-                        $scope.dataLoading = false;
+                        $scope.cancel();
+                        $location.path('/errorView');
+                        $rootScope.isLoggedIn = response.isLoggedIn;
                     }
                 });
             };
             $scope.cancel = function() {
+                $scope.$dismiss();
+            };
+            $scope.cancelRedirect = function() {
+                $location.path('/');
                 $scope.$dismiss();
             }
 

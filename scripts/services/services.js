@@ -242,16 +242,7 @@
         var shoppingCart = [];
     });
     app.service('about', function() {
-        this.getUsers = function() {
-            return users;
-        };
 
-        var users = [
-            {
-                username: 'Admin',
-                password: 'Admin'
-            }
-        ]
     });
 
     app.service('loginModal', function($modal, $rootScope) {
@@ -273,9 +264,10 @@
             $timeout(function() {
                 var response = {success: username === 'test' && password === 'test'};
                 if(!response.success) {
-                    response.message = 'Username or password is incorrect';
+                    response.isLoggedIn = false;
+                } else {
+                    response.isLoggedIn = true;
                 }
-                response.isLoggedIn = true;
                 callback(response);
             }, 1000);
 
