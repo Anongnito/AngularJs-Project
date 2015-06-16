@@ -232,9 +232,7 @@
                 productPrice: 0.4,
                 productDescription: 'With this shirt, you become a superstar baseball player instantly',
                 image: '../img/ecommerce/baseballShirt.jpg'
-
             }
-
         ];
 
         var selectedIndex = 0;

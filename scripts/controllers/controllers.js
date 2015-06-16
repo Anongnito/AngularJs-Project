@@ -402,13 +402,10 @@
     }]);
 
     app.controller('about', function($scope) {
-        $scope.credentials = {
-            username: '',
-            password: ''
-        };
+        //do nothing
     });
     app.controller('errorCtrl', function($scope) {
-        $scope.isLoggedIn = [];
+        $scope.isLoggedIn = false;
     });
 
     app.controller('LoginModalCtrl', ['$scope', '$rootScope', '$location', 'AuthenticationService',

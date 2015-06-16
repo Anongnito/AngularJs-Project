@@ -48,7 +48,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 app.run(function($rootScope, $state, loginModal) {
     $rootScope.isLoggedIn = false;
-    $rootScope.$on('$stateChangeStart', function(event, toState, toParams) {
+    $rootScope.$on('$stateChangeStart', function(event, toState) {
         var requireLogin = toState.data.requireLogin;
 
         if(requireLogin == true && $rootScope.isLoggedIn == false) {
